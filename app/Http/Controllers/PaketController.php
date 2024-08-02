@@ -47,35 +47,29 @@ class PaketController extends Controller
             'harga.min' => 'Harga tidak boleh kurang dari 0.'
         ]);
 
-        // Membuat paket baru
+        // Buat paket baru
         Paket::create($validatedData);
 
         // Redirect dengan pesan sukses
-        return redirect()->route('paket.index')->with('success', 'Paket berhasil ditambahkan.');
+        return redirect()->route('paket.index')->with('success', 'Paket berhasil ditambahkan!');
     }
 
     /**
-     * Menampilkan detail paket tertentu.
+     * Menampilkan formulir untuk mengedit paket tertentu.
      */
-    public function show(Paket $paket)
+    public function edit($id)
     {
-        // Menampilkan detail paket
-        return view('paket.show', compact('paket'));
-    }
+        // Mendapatkan paket berdasarkan ID
+        $paket = Paket::findOrFail($id);
 
-    /**
-     * Menampilkan formulir untuk mengedit paket yang sudah ada.
-     */
-    public function edit(Paket $paket)
-    {
-        // Menampilkan formulir untuk mengedit data paket
+        // Menampilkan formulir untuk mengedit paket
         return view('paket.edit', compact('paket'));
     }
 
     /**
-     * Memperbarui paket yang sudah ada di penyimpanan.
+     * Memperbarui paket yang ditentukan dalam penyimpanan.
      */
-    public function update(Request $request, Paket $paket)
+    public function update(Request $request, $id)
     {
         // Validasi data yang diterima
         $validatedData = $request->validate([
@@ -93,22 +87,28 @@ class PaketController extends Controller
             'harga.min' => 'Harga tidak boleh kurang dari 0.'
         ]);
 
-        // Memperbarui data paket
+        // Mendapatkan paket berdasarkan ID
+        $paket = Paket::findOrFail($id);
+
+        // Memperbarui paket dengan data yang telah divalidasi
         $paket->update($validatedData);
 
         // Redirect dengan pesan sukses
-        return redirect()->route('paket.index')->with('success', 'Data paket berhasil diperbarui.');
+        return redirect()->route('paket.index')->with('update', 'Paket berhasil diperbarui!');
     }
 
     /**
-     * Menghapus paket dari penyimpanan.
+     * Menghapus paket yang ditentukan dari penyimpanan.
      */
-    public function destroy(Paket $paket)
+    public function destroy($id)
     {
+        // Mendapatkan paket berdasarkan ID
+        $paket = Paket::findOrFail($id);
+
         // Menghapus paket
         $paket->delete();
 
         // Redirect dengan pesan sukses
-        return redirect()->route('paket.index')->with('success', 'Data paket berhasil dihapus.');
+        return redirect()->route('paket.index')->with('delete', 'Paket berhasil dihapus!');
     }
 }
