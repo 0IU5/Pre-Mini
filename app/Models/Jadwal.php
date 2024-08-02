@@ -36,4 +36,14 @@ class Jadwal extends Model
     {
         return $this->belongsTo(Mapel::class, 'id_mapel');  
     }
+
+    public function guru()
+    {
+        return $this->belongsTo(Guru::class, 'id_guru');
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class, 'id_payment');
+    }
 }

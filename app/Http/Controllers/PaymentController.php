@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\Paket; // Import model Paket
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,8 +14,7 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        // Mendapatkan semua pembayaran
-        $payment = Payment::all();
+        $payment = Payment::with('paket')->get(); // Mengambil semua pembayaran dengan relasi paket
         return view('payment.index', compact('payment'));
     }
 
@@ -23,8 +23,8 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        // Menampilkan formulir untuk membuat pembayaran baru
-        return view('payment.create');
+        $pakets = Paket::all(); // Mengambil semua paket
+        return view('payment.create', compact('pakets'));
     }
 
     /**
@@ -35,19 +35,23 @@ class PaymentController extends Controller
         // Validasi data yang diterima
         $validatedData = $request->validate([
             'metode_pembayaran' => 'required|string|max:255',
+            'nama' => 'required|string|max:255',
+            'no_hp' => 'required|string|max:15',
             'bukti_transaksi' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'id' => 'required|exists:users,id',
-            'id_paket' => 'required|exists:paket,id_paket'
+            'id_paket' => 'required|exists:paket,id_paket',
+            'tanggal_transaksi' => 'required|date', // Tambahkan validasi tanggal transaksi
         ], [
             'metode_pembayaran.required' => 'Metode pembayaran wajib diisi.',
+            'nama.required' => 'Nama wajib diisi.',
+            'no_hp.required' => 'Nomor HP wajib diisi.',
             'bukti_transaksi.required' => 'Bukti transaksi wajib diupload.',
             'bukti_transaksi.image' => 'Bukti transaksi harus berupa gambar.',
             'bukti_transaksi.mimes' => 'Gambar harus dalam format jpeg, png, atau jpg.',
             'bukti_transaksi.max' => 'Ukuran gambar tidak boleh lebih dari 2MB.',
-            'id.required' => 'ID pengguna wajib diisi.',
-            'id.exists' => 'ID pengguna tidak ditemukan.',
             'id_paket.required' => 'ID paket wajib diisi.',
-            'id_paket.exists' => 'ID paket tidak ditemukan.'
+            'id_paket.exists' => 'ID paket tidak ditemukan.',
+            'tanggal_transaksi.required' => 'Tanggal transaksi wajib diisi.',
+            'tanggal_transaksi.date' => 'Tanggal transaksi tidak valid.',
         ]);
 
         // Menyimpan gambar bukti transaksi
@@ -64,6 +68,7 @@ class PaymentController extends Controller
         return redirect()->route('payment.index')->with('success', 'Pembayaran berhasil ditambahkan.');
     }
 
+
     /**
      * Menampilkan detail pembayaran tertentu.
      */
@@ -78,8 +83,8 @@ class PaymentController extends Controller
      */
     public function edit(Payment $payment)
     {
-        // Menampilkan formulir untuk mengedit data pembayaran
-        return view('payment.edit', compact('payment'));
+        $pakets = Paket::all(); // Mengambil semua paket
+        return view('payment.edit', compact('payment', 'pakets'));
     }
 
     /**
@@ -90,18 +95,22 @@ class PaymentController extends Controller
         // Validasi data yang diterima
         $validatedData = $request->validate([
             'metode_pembayaran' => 'required|string|max:255',
+            'nama' => 'required|string|max:255',
+            'no_hp' => 'required|string|max:15',
             'bukti_transaksi' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'id' => 'required|exists:users,id',
-            'id_paket' => 'required|exists:paket,id_paket'
+            'id_paket' => 'required|exists:paket,id_paket',
+            'tanggal_transaksi' => 'required|date', // Tambahkan validasi tanggal transaksi
         ], [
             'metode_pembayaran.required' => 'Metode pembayaran wajib diisi.',
+            'nama.required' => 'Nama wajib diisi.',
+            'no_hp.required' => 'Nomor HP wajib diisi.',
             'bukti_transaksi.image' => 'Bukti transaksi harus berupa gambar.',
             'bukti_transaksi.mimes' => 'Gambar harus dalam format jpeg, png, atau jpg.',
             'bukti_transaksi.max' => 'Ukuran gambar tidak boleh lebih dari 2MB.',
-            'id.required' => 'ID pengguna wajib diisi.',
-            'id.exists' => 'ID pengguna tidak ditemukan.',
             'id_paket.required' => 'ID paket wajib diisi.',
-            'id_paket.exists' => 'ID paket tidak ditemukan.'
+            'id_paket.exists' => 'ID paket tidak ditemukan.',
+            'tanggal_transaksi.required' => 'Tanggal transaksi wajib diisi.',
+            'tanggal_transaksi.date' => 'Tanggal transaksi tidak valid.',
         ]);
 
         // Memperbarui gambar bukti transaksi jika ada file baru yang diupload

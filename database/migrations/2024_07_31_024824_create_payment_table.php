@@ -11,22 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jadwal', function (Blueprint $table) {
-            $table->id('id_jadwal');
-            $table->dateTime('start_time');
-            $table->dateTime('end_time');
-
-            $table->unsignedBigInteger('id');
-            $table->foreign('id')->references('id')->on('users')->onDelete('restrict');
-
+        Schema::create('payment', function (Blueprint $table) {
+            $table->id('id_payment');
+            $table->string('metode_pembayaran');
+            $table->string('nama');
+            $table->string('no_hp');
+            $table->string('bukti_transaksi');
+            $table->dateTime('tanggal_transaksi');
+        
             $table->unsignedBigInteger('id_paket');
             $table->foreign('id_paket')->references('id_paket')->on('paket')->onDelete('restrict');
-
-            $table->unsignedBigInteger('id_mapel');
-            $table->foreign('id_mapel')->references('id_mapel')->on('mapel')->onDelete('restrict');
-
+        
             $table->timestamps();
         });
+        
     }
 
     /**
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jadwal');
+        Schema::dropIfExists('payment');
     }
 };

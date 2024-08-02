@@ -33,11 +33,14 @@ class FeedbackController extends Controller
     {
         // Validasi data yang diterima
         $validatedData = $request->validate([
-            'id' => 'required|exists:users,id'
-            // Tambahkan validasi tambahan jika diperlukan
+            'feedback' => 'required|string',
+            'nama' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
         ], [
-            'id.required' => 'ID pengguna wajib diisi.',
-            'id.exists' => 'ID pengguna tidak ditemukan dalam tabel users.'
+            'feedback.required' => 'Feedback wajib diisi.',
+            'nama.required' => 'Nama wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
         ]);
 
         // Membuat feedback baru
@@ -72,11 +75,14 @@ class FeedbackController extends Controller
     {
         // Validasi data yang diterima
         $validatedData = $request->validate([
-            'id' => 'required|exists:users,id'
-            // Tambahkan validasi tambahan jika diperlukan
+            'feedback' => 'required|string',
+            'nama' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
         ], [
-            'id.required' => 'ID pengguna wajib diisi.',
-            'id.exists' => 'ID pengguna tidak ditemukan dalam tabel users.'
+            'feedback.required' => 'Feedback wajib diisi.',
+            'nama.required' => 'Nama wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
         ]);
 
         // Memperbarui data feedback

@@ -8,6 +8,7 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +59,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('payment', PaymentController::class);
     Route::resource('mapel', MapelController::class);
     Route::resource('student', StudentController::class);
+
+    Route::get('/search', [SearchController::class, 'index'])->name('search');
 });
 
 

@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mapel', function (Blueprint $table) {
-            $table->id('id_mapel');
+        Schema::create('guru', function (Blueprint $table) {
+            $table->id('id_guru');
+            $table->string('nama');
             $table->string('mapel');
-            $table->text('deskripsi');
+            $table->integer('umur'); // Ganti string dengan integer jika umur adalah angka
+            $table->string('foto')->nullable(); // Foto bisa kosong, jadi buat nullable
+            $table->string('pendidikan_terakhir');
             $table->timestamps();
         });
     }
@@ -24,6 +27,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mapel');
+        Schema::dropIfExists('guru');
     }
 };
+    
