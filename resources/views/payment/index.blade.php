@@ -31,7 +31,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($payments as $payment)
+                @foreach ($payment as $payment)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td class="px-6 py-4">{{ $payment->nama }}</td>
                         <td class="px-6 py-4">{{ $payment->no_hp }}</td>

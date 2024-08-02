@@ -35,7 +35,8 @@ class FeedbackController extends Controller
         $validatedData = $request->validate([
             'feedback' => 'required|string',
             'nama' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'email' => 'required|email|max:255',
+            // Tambahkan validasi tambahan jika diperlukan
         ], [
             'feedback.required' => 'Feedback wajib diisi.',
             'nama.required' => 'Nama wajib diisi.',
@@ -77,7 +78,8 @@ class FeedbackController extends Controller
         $validatedData = $request->validate([
             'feedback' => 'required|string',
             'nama' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'email' => 'required|email|max:255',
+            // Tambahkan validasi tambahan jika diperlukan
         ], [
             'feedback.required' => 'Feedback wajib diisi.',
             'nama.required' => 'Nama wajib diisi.',

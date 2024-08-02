@@ -119,7 +119,7 @@
                 </div>
 
                 <!-- Tombol Registrasi -->
-                <a href="{{ route('student.create') }}" class="btn btn-sm bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600">New Student!!</a>
+                <a href="{{ route('register') }}" class="btn btn-sm bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600">New Student!!</a>
 
                 <!-- Profile -->
                 <div class="dropdown dropdown-end">
