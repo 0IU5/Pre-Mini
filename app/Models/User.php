@@ -19,7 +19,13 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'no_hp',
+        'kelas',
+        'alamat',
+        'photo_profil',
+        'tanggal_lahir',
         'password',
+        'jenjang_pendidikan',
     ];
 
     /**
@@ -45,23 +51,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function student()
-    {
-        return $this->hasMany(student::class,'id_student');
-    }
-
-    public function payment()
-    {
-        return $this->hasMany(Payment::class,'id_payment');
-    }
-
     public function jadwal()
     {
         return $this->hasMany(Jadwal::class,'id_jadwal');
-    }
-
-    public function feedback()
-    {
-        return $this->hasMany(Feedback::class,'id_feedback');
     }
 }

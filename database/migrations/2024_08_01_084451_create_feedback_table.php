@@ -14,11 +14,8 @@ return new class extends Migration
         Schema::create('feedback', function (Blueprint $table) {
             $table->id('id_feedback');
             $table->text('feedback');
-            $table->Date('tanggal');
-
-            $table->unsignedBigInteger('id');
-            $table->foreign('id')->references('id')->on('users')->onDelete('restrict');
-            
+            $table->string('nama');
+            $table->string('email');
             $table->timestamps();
         });
     }
