@@ -20,8 +20,6 @@ class SearchController extends Controller
                 return redirect()->route('feedback.index');
             case 'mapel':
                 return redirect()->route('mapel.index');
-            case 'student':
-                return redirect()->route('student.index');
             default:
                 return redirect()->route('dashboard')->with('error', 'Halaman tidak ditemukan.');
         }

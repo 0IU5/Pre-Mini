@@ -11,7 +11,6 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -67,7 +66,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('feedback', FeedbackController::class);
     Route::resource('payment', PaymentController::class);
     Route::resource('mapel', MapelController::class);
-    Route::resource('student', StudentController::class);
 
 
 require __DIR__.'/auth.php';
