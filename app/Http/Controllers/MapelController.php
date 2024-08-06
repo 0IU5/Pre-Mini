@@ -36,10 +36,10 @@ class MapelController extends Controller
             'mapel' => 'required|string|max:255',
             'deskripsi' => 'required|string'
         ], [
-            'mapel.required' => 'Nama mata pelajaran wajib diisi.',
-            'mapel.string' => 'Nama mata pelajaran harus berupa string.',
-            'mapel.max' => 'Nama mata pelajaran tidak boleh lebih dari 255 karakter.',
-            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'mapel.required' => 'Kolom wajib diisi.',
+            'mapel.string' => 'Kolom harus berupa string.',
+            'mapel.max' => 'Mapel tidak boleh lebih dari 255 karakter.',
+            'deskripsi.required' => 'Kolom wajib diisi.',
             'deskripsi.string' => 'Deskripsi harus berupa string.',
         ]);
 
@@ -78,10 +78,10 @@ class MapelController extends Controller
             'mapel' => 'required|string|max:255',
             'deskripsi' => 'required|string'
         ], [
-            'mapel.required' => 'Nama mata pelajaran wajib diisi.',
-            'mapel.string' => 'Nama mata pelajaran harus berupa string.',
-            'mapel.max' => 'Nama mata pelajaran tidak boleh lebih dari 255 karakter.',
-            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'mapel.required' => 'Kolom wajib diisi.',
+            'mapel.string' => 'Kolom harus berupa string.',
+            'mapel.max' => 'Kolom tidak boleh lebih dari 255 karakter.',
+            'deskripsi.required' => 'Kolom wajib diisi.',
             'deskripsi.string' => 'Deskripsi harus berupa string.',
         ]);
 

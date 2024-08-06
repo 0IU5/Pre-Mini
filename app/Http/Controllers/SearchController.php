@@ -11,17 +11,20 @@ class SearchController extends Controller
         $query = $request->input('query');
         $query = strtolower($query); // Ubah kata kunci menjadi huruf kecil untuk konsistensi
 
-        switch ($query) {
-            case 'payment':
-                return redirect()->route('payment.index');
-            case 'jadwal':
-                return redirect()->route('jadwal.index');
-            case 'feedback':
-                return redirect()->route('feedback.index');
-            case 'mapel':
-                return redirect()->route('mapel.index');
-            default:
-                return redirect()->route('dashboard')->with('error', 'Halaman tidak ditemukan.');
+        $routes = [
+            'payment' => 'payment.index',
+            'jadwal' => 'jadwal.index',
+            'feedback' => 'feedback.index',
+            'mapel' => 'mapel.index',
+            'guru' => 'guru.index',
+            'paket' => 'paket.index',
+        ];
+
+        if (array_key_exists($query, $routes)) {
+            return redirect()->route($routes[$query]);
         }
+
+        // Jika tidak ada hasil, tampilkan pesan error dan tetap di halaman yang sama
+        return redirect()->back()->withInput()->with('search-error', 'Data tidak ditemukan.');
     }
 }

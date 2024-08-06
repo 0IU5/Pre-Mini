@@ -21,9 +21,4 @@ class Mapel extends Model
     {
         return $this->hasMany(Jadwal::class,'id_jadwal');
     }
-
-    public function guru()
-    {
-        return $this->belongsTo(Guru::class, 'id_guru');
-    }
 }

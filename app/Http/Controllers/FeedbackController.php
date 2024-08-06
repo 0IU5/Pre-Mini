@@ -39,8 +39,8 @@ class FeedbackController extends Controller
             // Tambahkan validasi tambahan jika diperlukan
         ], [
             'feedback.required' => 'Feedback wajib diisi.',
-            'nama.required' => 'Nama wajib diisi.',
-            'email.required' => 'Email wajib diisi.',
+            'nama.required' => 'Kolom wajib diisi.',
+            'email.required' => 'Kolom wajib diisi.',
             'email.email' => 'Format email tidak valid.',
         ]);
 
@@ -82,8 +82,8 @@ class FeedbackController extends Controller
             // Tambahkan validasi tambahan jika diperlukan
         ], [
             'feedback.required' => 'Feedback wajib diisi.',
-            'nama.required' => 'Nama wajib diisi.',
-            'email.required' => 'Email wajib diisi.',
+            'nama.required' => 'Kolom wajib diisi.',
+            'email.required' => 'Kolom wajib diisi.',
             'email.email' => 'Format email tidak valid.',
         ]);
 
