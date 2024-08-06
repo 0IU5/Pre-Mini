@@ -33,6 +33,11 @@
             .menu-icon.open {
                 transform: rotate(180deg);
             }
+
+            aside {
+                position: relative;
+                z-index: 10; /* Z-index yang lebih tinggi dari elemen lain */
+            }
         </style>
     </head>
     <body class="flex flex-col min-h-screen bg-gray-600" x-data="{ open: false }" @click.away="open = false">
