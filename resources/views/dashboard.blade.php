@@ -23,8 +23,8 @@
         <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Pencapaian Kami</h1>
         <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Kami sudah menghasilkan beberapa calon anak-anak sukses yang telah berlangganan di bimbel ini..</p>
     </div>
-    <div class="flex flex-wrap -m-4">
-        <div class="lg:w-1/3 sm:w-1/2 p-4">
+    <div class="flex flex-wrap -m-4 ">
+        <div class="lg:w-1/3 sm:w-1/2 p-4 z-0">
             <div class="flex relative">
                 <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="./img/img-LP/mat.jpeg">
                 <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-gray-300 opacity-0 hover:opacity-100">
@@ -54,7 +54,7 @@
                 </div>
             </div>
         </div>
-        <div class="lg:w-1/3 sm:w-1/2 p-4">
+        <div class="lg:w-1/3 sm:w-1/2 p-4 z-0">
             <div class="flex relative">
                 <img alt="gallery" class="absolute inset-0 w-full h-full object-cover" src="./img/img-LP/fisika.jpeg">
                 <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-gray-300 opacity-0 hover:opacity-100">
