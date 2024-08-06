@@ -12,11 +12,21 @@ class PaymentController extends Controller
     /**
      * Menampilkan daftar semua pembayaran.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $payment = Payment::with('paket')->get(); // Mengambil semua pembayaran dengan relasi paket
-        return view('payment.index', compact('payment'));
+        // Ambil query pencarian dari request
+        $search = $request->input('search');
+    
+        // Ambil data pembayaran dengan filter pencarian dan relasi paket
+        $payments = Payment::with('paket')
+            ->when($search, function ($query, $search) {
+                return $query->where('nama', 'like', "%{$search}%");
+            })
+            ->paginate(10); // Ubah jumlah per halaman sesuai kebutuhan
+    
+        return view('payment.index', compact('payments'));
     }
+    
 
     /**
      * Menampilkan formulir untuk membuat pembayaran baru.
@@ -148,4 +158,6 @@ class PaymentController extends Controller
         // Redirect dengan pesan sukses
         return redirect()->route('payment.index')->with('success', 'Data pembayaran berhasil dihapus.');
     }
+
+    
 }

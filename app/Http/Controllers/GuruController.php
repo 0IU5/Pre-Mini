@@ -1,8 +1,9 @@
-<?php
+<?php   
 
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
+use App\Models\Mapel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,12 +12,29 @@ class GuruController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Mengambil semua data guru
-        $guru = Guru::all();
-        return view('guru.index', compact('guru')); // Tampilkan data di view
+        // Ambil parameter pencarian dari query string
+        $search = $request->input('search');
+    
+        // Buat query dasar
+        $query = Guru::query();
+    
+        // Jika ada parameter pencarian, tambahkan kondisi WHERE
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('nama', 'like', "%{$search}%")
+                  ->orWhere('pendidikan_terakhir', 'like', "%{$search}%");
+            });
+        }
+    
+        // Terapkan paginasi pada hasil query
+        $guru = $query->paginate(10);
+    
+        // Kembalikan view dengan data guru
+        return view('guru.index', compact('guru'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +42,8 @@ class GuruController extends Controller
     public function create()
     {
         // Menampilkan formulir untuk membuat data guru baru
-        return view('guru.create');
+        $mapel = Mapel::all(); // Mengambil data mata pelajaran untuk dropdown
+        return view('guru.create', compact('mapel'));
     }
 
     /**
@@ -35,17 +54,20 @@ class GuruController extends Controller
         // Validasi data yang diterima
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
-            'mapel' => 'required|string|max:255',
-            'umur' => 'required|integer',
+            'umur' => 'required|integer|min:1|max:100',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'pendidikan_terakhir' => 'required|string|max:255',
+            'id_mapel' => 'required|exists:mapel,id_mapel' // Validasi ID mata pelajaran
         ],[
-            'nama.required' => 'Nama guru wajib diisi',
-            'mapel.required' => 'Mata pelajaran wajib diisi',
-            'umur.required' => 'Umur wajib diisi',
-            'umur.integer' => 'Umur harus berupa angka',
+            'nama.required' => 'Kolom wajib diisi',
+            'umur.required' => 'Kolom diisi',
+            'umur.integer' => 'Usia harus berupa angka',
+            'umur.min' => 'Usia minimal 1!',
+            'umur.max' => 'Usia maksimal 100!',
             'foto.image' => 'Foto harus berupa gambar',
             'pendidikan_terakhir.required' => 'Pendidikan terakhir wajib diisi',
+            'id_mapel.required' => 'Mata pelajaran wajib dipilih',
+            'id_mapel.exists' => 'Mata pelajaran tidak ditemukan'
         ]);
 
         // Menyimpan foto jika ada
@@ -77,7 +99,8 @@ class GuruController extends Controller
     public function edit(Guru $guru)
     {
         // Menampilkan formulir untuk mengedit data guru
-        return view('guru.edit', compact('guru'));
+        $mapel = Mapel::all(); // Mengambil data mata pelajaran untuk dropdown
+        return view('guru.edit', compact('guru', 'mapel'));
     }
 
     /**
@@ -88,17 +111,20 @@ class GuruController extends Controller
         // Validasi data yang diterima
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
-            'mapel' => 'required|string|max:255',
-            'umur' => 'required|integer',
+            'umur' => 'required|integer|min:1|max:100',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'pendidikan_terakhir' => 'required|string|max:255',
+            'id_mapel' => 'required|exists:mapel,id_mapel' // Validasi ID mata pelajaran
         ],[
-            'nama.required' => 'Nama guru wajib diisi',
-            'mapel.required' => 'Mata pelajaran wajib diisi',
-            'umur.required' => 'Umur wajib diisi',
-            'umur.integer' => 'Umur harus berupa angka',
+            'nama.required' => 'Kolom wajib diisi',
+            'umur.required' => 'Kolom diisi',
+            'umur.integer' => 'Usia harus berupa angka',
+            'umur.min' => 'Usia minimal 1!',
+            'umur.max' => 'Usia maksimal 100!',
             'foto.image' => 'Foto harus berupa gambar',
             'pendidikan_terakhir.required' => 'Pendidikan terakhir wajib diisi',
+            'id_mapel.required' => 'Mata pelajaran wajib dipilih',
+            'id_mapel.exists' => 'Mata pelajaran tidak ditemukan'
         ]);
 
         // Menyimpan foto jika ada file baru yang diupload

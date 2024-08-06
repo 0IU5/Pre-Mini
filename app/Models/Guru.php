@@ -30,7 +30,7 @@ class Guru extends Model
      */
     protected $fillable = [
         'nama',
-        'mapel',
+        'id_mapel',
         'umur',
         'foto',
         'pendidikan_terakhir',
@@ -51,12 +51,7 @@ class Guru extends Model
      * @var bool
      */
     public $timestamps = true;
-
-    public function mapel()
-    {
-        return $this->hasMany(Mapel::class,'id_mapel');
-    }
-
+    
     public function jadwal()
     {
         return $this->hasMany(Jadwal::class,'id_jadwal');

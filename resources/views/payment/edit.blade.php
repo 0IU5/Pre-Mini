@@ -41,8 +41,13 @@
 
             <div class="mb-4">
                 <label for="metode_pembayaran" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Metode Pembayaran</label>
-                <input type="text" name="metode_pembayaran" id="metode_pembayaran" value="{{ old('metode_pembayaran', $payment->metode_pembayaran) }}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300" required>
-            </div>
+                <select name="metode_pembayaran" id="metode_pembayaran" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300" required>
+                    <option value="" disabled {{ old('metode_pembayaran') == '' ? 'selected' : '' }}>Pilih Metode Pembayaran</option>
+                    <option value="transfer" {{ old('metode_pembayaran') == 'transfer' ? 'selected' : '' }}>Transfer</option>
+                    <option value="tunai" {{ old('metode_pembayaran') == 'tunai' ? 'selected' : '' }}>Tunai</option>
+                    <option value="dana" {{ old('metode_pembayaran') == 'dana' ? 'selected' : '' }}>Dana</option>
+                </select>
+            </div>     
 
             <div class="mb-4">
                 <label for="bukti_transaksi" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Bukti Transaksi</label>

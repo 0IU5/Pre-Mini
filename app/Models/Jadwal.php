@@ -15,17 +15,13 @@ class Jadwal extends Model
     protected $keyType = 'int';
 
     protected $fillable = [
-        'start_time',  
+        'start_time',
         'end_time',
-        'id', 
-        'id_paket', 
-        'id_mapel',  
+        'id_paket',
+        'id_mapel',
+        'id_guru',
+        'id_payment',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'id');
-    }
 
     public function paket()
     {
@@ -34,7 +30,7 @@ class Jadwal extends Model
 
     public function mapel()
     {
-        return $this->belongsTo(Mapel::class, 'id_mapel');  
+        return $this->belongsTo(Mapel::class, 'id_mapel');
     }
 
     public function guru()
