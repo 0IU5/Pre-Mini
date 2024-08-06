@@ -30,6 +30,7 @@
         </div>
         <div>
             <button type="submit" class="bg-indigo-500 text-white px-4 py-2 rounded">Simpan</button>
+            <a href="{{ route('paket.index') }}" class="ml-4 bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:ring-4 focus:ring-gray-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-700">Kembali</a>
         </div>
     </form>
 </div>

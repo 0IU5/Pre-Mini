@@ -46,23 +46,32 @@
             </a>
         </div>
 
-        <div class="flex flex-wrap -m-4">
-            @forelse ($guru as $guruItem)
-                <div class="lg:w-1/3 sm:w-1/2 p-4">
-                    <div class="flex relative">
-                        <!-- foto guru -->
-                        <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="{{ asset('storage/' . $guruItem->foto) }}">
-                        <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-gray-300 opacity-0 hover:opacity-100">
-                            <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">{{ $guruItem->nama }}</h2>
-                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{ $guruItem->mapel }}</h1>
-                            <p class="leading-relaxed">Umur: {{ $guruItem->umur }}</p>
-                            <p class="leading-relaxed">Pendidikan Terakhir: {{ $guruItem->pendidikan_terakhir }}</p>
-                        </div>
-                        <div class="absolute bottom-4 right-4">
+        <table class="w-full max-w-6xl justify-center mx-auto text-sm text-left text-gray-500 dark:text-gray-400 rounded-lg">
+            <thead class="bg-gray-800 text-gray-200">
+                <tr>
+                    <th class="py-3 px-6">Nama</th>
+                    <th class="py-3 px-6">Mapel</th>
+                    <th class="py-3 px-6">Umur</th>
+                    <th class="py-3 px-6">Foto</th>
+                    <th class="py-3 px-6">Pendidikan Terakhir</th>
+                    <th class="py-3 px-6">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($guru as $guruItem)
+                    <tr class="bg-gray-700 border-b border-gray-600">
+                        <td class="py-4 px-6 text-white">{{ $guruItem->nama }}</td>
+                        <td class="py-4 px-6 text-white">{{ $guruItem->mapel }}</td>
+                        <td class="py-4 px-6 text-white">{{ $guruItem->umur }}</td>
+                        <td class="py-4 px-6">
+                            <img src="{{ asset('storage/' . $guruItem->foto) }}" alt="Foto Guru" class="w-20">
+                        </td>
+                        <td class="py-4 px-6 text-white">{{ $guruItem->pendidikan_terakhir }}</td>
+                        <td class="py-4 px-6 flex items-center space-x-2">
                             <a href="{{ route('guru.edit', $guruItem->id_guru) }}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition">Edit</a>
                             <button type="button" onclick="showModal({{ $guruItem->id_guru }})" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Hapus</button>
-                        </div>
-                    </div>
+                        </td>
+                    </tr>
 
                     <!-- Modal -->
                     <div id="popup-modal-{{ $guruItem->id_guru }}" tabindex="-1" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
@@ -89,11 +98,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            @empty
-                <div class="w-full text-center py-10 text-white">Tidak ada data guru.</div>
-            @endforelse
-        </div>
+                @empty
+                    <tr>
+                        <td colspan="6" class="px-4 py-3 text-center text-white">Tidak ada data guru.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
 
         <!-- Pagination -->
         <div class="mt-4">
@@ -111,4 +122,5 @@
         document.getElementById('popup-modal-' + guruId).classList.add('hidden');
     }
 </script>
+
 @endsection
