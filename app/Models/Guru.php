@@ -56,6 +56,11 @@ class Guru extends Model
     {
         return $this->hasMany(Jadwal::class,'id_jadwal');
     }
+
+    public function mapel()
+    {
+        return $this->belongsTo(Mapel::class, 'id_mapel', 'id_mapel');
+    }
     
     
 }

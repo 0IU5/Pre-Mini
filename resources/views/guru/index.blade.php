@@ -5,19 +5,18 @@
     <div class="min-h-screen justify-center mx-auto max-w-5xl pt-12">
         <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Daftar Guru</h2>
 
-        <form method="GET" action="{{ route('guru.index') }}">
+        <form method="GET" action="{{ route('guru.index') }}" class="flex justify-end mb-4">
             <label for="table-search" class="sr-only">Search</label>
-            <div class="relative mb-4">
+            <div class="relative flex items-center">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                     <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                     </svg>
                 </div>
-                <input type="text" id="table-search" name="search" value="{{ request()->input('search') }}" class="block pl-10 w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for guru">
-                <button type="submit" class="absolute right-0 top-0 mt-2 mr-3 text-blue-600">Search</button>
+                <input type="text" id="table-search" name="search" value="{{ request()->input('search') }}" class="block pl-10 pr-16 w-64 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for guru">
             </div>
-        </form>
-
+        </form>        
+        
         @if (session('success'))
             <div id="alert-success" class="bg-green-700 text-white py-2 px-4 mb-4 rounded flex justify-between items-center">
                 {{ session('success') }}
@@ -59,7 +58,7 @@
                 @forelse ($guru as $guruItem)
                     <tr class="bg-gray-700 border-b border-gray-600">
                         <td class="py-4 px-6 text-white">{{ $guruItem->nama }}</td>
-                        <td class="py-4 px-6 text-white">{{ $guruItem->mapel }}</td>
+                        <td class="py-4 px-6 text-white">{{ $guruItem->mapel->mapel }}</td>
                         <td class="py-4 px-6 text-white">{{ $guruItem->umur }}</td>
                         <td class="py-4 px-6">
                             <img src="{{ asset('storage/' . $guruItem->foto) }}" alt="Foto Guru" class="w-20">
