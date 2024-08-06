@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +10,15 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    /**
+     * Display the user's profile.
+     */
+    public function index(): View
+    {
+        $profile = Auth::user(); // Ambil data pengguna yang sedang login
+        return view('profile.index', compact('profile'));
+    }
+
     /**
      * Display the user's profile form.
      */

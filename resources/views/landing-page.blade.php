@@ -24,7 +24,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="28" height="28" viewBox="0 0 24 24" style="fill: rgba(228, 224, 15, 1); filter: drop-shadow(0 0 15px rgba(255, 255, 0, 0.8));">
                     <path d="M21.947 9.179a1.001 1.001 0 0 0-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 0 0-1.822-.001L8.622 8.05l-5.701.453a1 1 0 0 0-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 0 0 1.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 0 0 1.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z"/>
                 </svg>
-                <a href="{{ route('dashboard') }}" class="text-2xl text-white">StarClass</a>
+                <a href="{{ route('logout') }}" class="text-2xl text-white">StarClass</a>
             </div>
 
 
@@ -75,102 +75,108 @@
         </div>
 
         <!-- Main content -->
-        <section class="bg-white text-black body-font">
+        <section class="bg-gray-100 text-black body-font">
         <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
-          <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600">
+          <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="./img/dash.jpeg">
           <div class="text-center lg:w-2/3 w-full">
-            <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Microdosing synth tattooed vexillologist</h1>
-            <p class="mb-8 leading-relaxed">Meggings kinfolk echo park stumptown DIY, kale chips beard jianbing tousled. Chambray dreamcatcher trust fund, kitsch vice godard disrupt ramps hexagon mustache umami snackwave tilde chillwave ugh. Pour-over meditation PBR&amp;B pickled ennui celiac mlkshk freegan photo booth af fingerstache pitchfork.</p>
+            <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Selamat Datang di Website Kami!!</h1>
+            <p class="mb-8 leading-relaxed">Di Bimbel, kami percaya bahwa setiap siswa mempunyai potensi untuk berprestasi. Misi kami adalah menyediakan layanan bimbingan belajar yang dipersonalisasi dan efektif yang memenuhi kebutuhan unik setiap pelajar, membantu mereka mencapai tujuan akademik dan seterusnya.</p>
             <div class="flex justify-center">
-              <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Get Started</button>
+            <button class="inline-flex text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" onclick="window.location.href='{{ route('logout') }}'">Ayo Mulai!!</button>
             </div>
           </div>
         </div>
 
+        <!-- pencapaian -->
         <div class="container px-5 py-24 mx-auto">
-          <div class="flex flex-col text-center w-full mb-20">
-            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Master Cleanse Reliac Heirloom</h1>
-            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them man bun deep jianbing selfies heirloom.</p>
-          </div>
-          <div class="flex flex-wrap -m-4">
-            <div class="lg:w-1/3 sm:w-1/2 p-4">
-              <div class="flex relative">
-                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/600x360">
-                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
-                  <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">THE SUBTITLE</h2>
-                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Shooting Stars</h1>
-                  <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+    <div class="flex flex-col text-center w-full mb-20">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Pencapaian Kami</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Kami sudah menghasilkan beberapa calon anak-anak sukses yang telah berlangganan di bimbel ini..</p>
+    </div>
+    <div class="flex flex-wrap -m-4">
+        <div class="lg:w-1/3 sm:w-1/2 p-4">
+            <div class="flex relative">
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="./img/img-LP/mat.jpeg">
+                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-gray-300 opacity-0 hover:opacity-100">
+                    <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">MATEMATIKA</h2>
+                    <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Bintang Pelajar</h1>
+                    <p class="leading-relaxed">Dengan bimbingan kami, siswa ini berhasil meraih juara olimpiade matematika tingkat nasional.</p>
                 </div>
-              </div>
             </div>
-            <div class="lg:w-1/3 sm:w-1/2 p-4">
-              <div class="flex relative">
-                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/601x361">
-                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
-                  <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">THE SUBTITLE</h2>
-                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">The Catalyzer</h1>
-                  <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-                </div>
-              </div>
-            </div>
-            <div class="lg:w-1/3 sm:w-1/2 p-4">
-              <div class="flex relative">
-                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/603x363">
-                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
-                  <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">THE SUBTITLE</h2>
-                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">The 400 Blows</h1>
-                  <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-                </div>
-              </div>
-            </div>
-            <div class="lg:w-1/3 sm:w-1/2 p-4">
-              <div class="flex relative">
-                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/602x362">
-                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
-                  <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">THE SUBTITLE</h2>
-                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Neptune</h1>
-                  <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-                </div>
-              </div>
-            </div>
-            <div class="lg:w-1/3 sm:w-1/2 p-4">
-              <div class="flex relative">
-                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/605x365">
-                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
-                  <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">THE SUBTITLE</h2>
-                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Holden Caulfield</h1>
-                  <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-                </div>
-              </div>
-            </div>
-            <div class="lg:w-1/3 sm:w-1/2 p-4">
-              <div class="flex relative">
-                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/606x366">
-                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
-                  <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">THE SUBTITLE</h2>
-                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Alper Kamu</h1>
-                  <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
+        <div class="lg:w-1/3 sm:w-1/2 p-4">
+            <div class="flex relative">
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="./img/img-LP/penulis.jpeg">
+                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-gray-300 opacity-0 hover:opacity-100">
+                    <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">BAHASA INDONESIA</h2>
+                    <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Penulis Berbakat</h1>
+                    <p class="leading-relaxed">Siswa ini telah memenangkan beberapa lomba menulis esai dan puisi di berbagai kompetisi.</p>
+                </div>
+            </div>
+        </div>
+        <div class="lg:w-1/3 sm:w-1/2 p-4">
+            <div class="flex relative">
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="./img/img-LP/ps.jpeg">
+                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-gray-300 opacity-0 hover:opacity-100">
+                    <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">BAHASA INGGRIS</h2>
+                    <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Pembicara Publik</h1>
+                    <p class="leading-relaxed">Berkat latihan intensif, siswa ini mampu menjadi pembicara terbaik dalam debat bahasa Inggris tingkat internasional.</p>
+                </div>
+            </div>
+        </div>
+        <div class="lg:w-1/3 sm:w-1/2 p-4">
+            <div class="flex relative">
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover" src="./img/img-LP/fisika.jpeg">
+                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-gray-300 opacity-0 hover:opacity-100">
+                    <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">FISIKA</h2>
+                    <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Ilmuwan Muda</h1>
+                    <p class="leading-relaxed">Siswa ini berhasil membuat proyek ilmiah yang diakui di berbagai ajang lomba sains internasional.</p>
+                </div>
+            </div>
+        </div>
+        <div class="lg:w-1/3 sm:w-1/2 p-4">
+            <div class="flex relative">
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="./img/img-LP/kimia.jpeg">
+                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-gray-300 opacity-0 hover:opacity-100">
+                    <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">KIMIA</h2>
+                    <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Peneliti Muda</h1>
+                    <p class="leading-relaxed">Dengan bimbingan kami, siswa ini mampu melakukan penelitian yang dipublikasikan di jurnal ilmiah terkemuka.</p>
+                </div>
+            </div>
+        </div>
+        <div class="lg:w-1/3 sm:w-1/2 p-4">
+            <div class="flex relative">
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="./img/img-LP/biology.jpeg">
+                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-gray-300 opacity-0 hover:opacity-100">
+                    <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">BIOLOGI</h2>
+                    <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Dokter Muda</h1>
+                    <p class="leading-relaxed">Siswa ini telah diterima di fakultas kedokteran ternama berkat prestasi akademiknya yang gemilang.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
         <div class="container px-5 py-24 mx-auto flex flex-wrap">
+        <div class="flex flex-col text-center w-full mb-20">
+          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Our Services</h1>
+          <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Kami menyediakan beberapa pilihan pelayanan untuk murid..</p>
+        </div>
           <div class="lg:w-1/2 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
-            <img alt="feature" class="object-cover object-center h-full w-full" src="https://dummyimage.com/460x500">
+            <img alt="feature" class="object-cover object-center h-full w-full" src="./img/img-LP/services.jpeg">
           </div>
           <div class="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-1/2 lg:pl-12 lg:text-left text-center">
             <div class="flex flex-col mb-10 lg:items-start items-center">
-              <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5">
+              <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-blue-500 mb-5">
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
                   <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                 </svg>
               </div>
               <div class="flex-grow">
-                <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Shooting Stars</h2>
-                <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.</p>
-                <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
+                <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Menyediakan Private CLass</h2>
+                <p class="leading-relaxed text-base">Jadi private class dikhusus kan bagi anak murid yang ingin belajar namun hanya sendiri tidak bersama teman.</p>
+                <a href="{{ route('logout') }}" class="mt-3 text-blue-500 inline-flex items-center">Learn More
                   <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                     <path d="M5 12h14M12 5l7 7-7 7"></path>
                   </svg>
@@ -178,7 +184,7 @@
               </div>
             </div>
             <div class="flex flex-col mb-10 lg:items-start items-center">
-              <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5">
+              <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-blue-500 mb-5">
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
                   <circle cx="6" cy="6" r="3"></circle>
                   <circle cx="6" cy="18" r="3"></circle>
@@ -186,9 +192,9 @@
                 </svg>
               </div>
               <div class="flex-grow">
-                <h2 class="text-gray-900 text-lg title-font font-medium mb-3">The Catalyzer</h2>
-                <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.</p>
-                <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
+                <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Terhubung dengan RoboGuru</h2>
+                <p class="leading-relaxed text-base">Untuk menunjang dan meningkatkan cara belajar, kami juga terhubung dengan roboGuru</p>
+                <a href="{{ route('logout') }}" class="mt-3 text-blue-500 inline-flex items-center">Learn More
                   <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                     <path d="M5 12h14M12 5l7 7-7 7"></path>
                   </svg>
@@ -196,16 +202,16 @@
               </div>
             </div>
             <div class="flex flex-col mb-10 lg:items-start items-center">
-              <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5">
+              <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-blue-500 mb-5">
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
                   <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
                   <circle cx="12" cy="7" r="4"></circle>
                 </svg>
               </div>
               <div class="flex-grow">
-                <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Neptune</h2>
-                <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.</p>
-                <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
+                <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Konseling</h2>
+                <p class="leading-relaxed text-base">Jadi kami juga menyediakan bimbingan konseling untuk murid - murid.</p>
+                <a href="{{ route('logout') }}" class="mt-3 text-blue-500 inline-flex items-center">Learn More
                   <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                     <path d="M5 12h14M12 5l7 7-7 7"></path>
                   </svg>
