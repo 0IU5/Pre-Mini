@@ -151,15 +151,16 @@ class GuruController extends Controller
      */
     public function destroy(Guru $guru)
     {
-        // Hapus foto jika ada
-        if ($guru->foto) {
-            Storage::disk('public')->delete($guru->foto);
+        // Mengecek apakah pembayaran sedang digunakan dalam relasi dengan Jadwal
+        if ($guru->jadwal()->exists()) {
+            // Redirect dengan pesan error jika pembayaran sedang digunakan
+            return redirect()->route('guru.index')->with('error', 'Pembayaran tidak dapat dihapus karena sedang digunakan!');
         }
 
-        // Menghapus data guru
+        // Menghapus pembayaran
         $guru->delete();
 
         // Redirect dengan pesan sukses
-        return redirect()->route('guru.index')->with('success', 'Data guru berhasil dihapus.');
+        return redirect()->route('guru.index')->with('success', 'Data pembayaran berhasil dihapus.');
     }
 }

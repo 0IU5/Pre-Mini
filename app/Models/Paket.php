@@ -21,11 +21,11 @@ class Paket extends Model
 
     public function payment()
     {
-        return $this->hasMany(Payment::class,'id_payment');
+        return $this->hasMany(Payment::class,'id_paket');
     }
 
-    public function jadwal()
+    public function jaket()
     {
-        return $this->hasMany(Jadwal::class,'id_jadwal');
+        return $this->hasMany(Jaket::class,'id_paket');
     }
 }

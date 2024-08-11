@@ -12,14 +12,14 @@
                 <div class="space-y-4">
                     <div>
                         <label for="mapel" class="block text-sm font-medium text-gray-700 dark:text-white">Nama Mata Pelajaran</label>
-                        <input type="text" name="mapel" id="mapel" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white" value="{{ old('mapel', $mapel->mapel) }}">
+                        <input type="text" name="mapel" id="mapel" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white" value="{{ old('mapel') ?? $mapel->mapel }}">
                         @error('mapel')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
                         <label for="deskripsi" class="block text-sm font-medium text-gray-700 dark:text-white">Deskripsi</label>
-                        <textarea name="deskripsi" id="deskripsi" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">{{ old('deskripsi', $mapel->deskripsi) }}</textarea>
+                        <textarea name="deskripsi" id="deskripsi" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">{{ old('deskripsi') ?? $mapel->deskripsi }}</textarea>
                         @error('deskripsi')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror

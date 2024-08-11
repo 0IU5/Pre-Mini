@@ -7,7 +7,6 @@ use App\Models\Paket;
 use App\Models\Mapel;
 use App\Models\Guru;
 use App\Models\Payment;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class JadwalController extends Controller
@@ -44,30 +43,23 @@ class JadwalController extends Controller
     {
         // Validasi data yang diterima
         $validatedData = $request->validate([
-            'start_time' => 'required|date',
-            'end_time' => 'required|date|after:start_time',
-            'id_paket' => 'required|exists:paket,id_paket',
-            'id_mapel' => 'required|exists:mapel,id_mapel',
+            'hari' => 'required',
+            'start_time' => 'required|after_or_equal:08:00|before_or_equal:21:00',
+            'end_time' => 'required|after:start_time|before_or_equal:21:00',
             'id_guru' => 'required|exists:guru,id_guru',
             'id_payment' => 'required|exists:payment,id_payment',
         ], [
-            'start_time.required' => 'Waktu mulai wajib diisi.',
-            'end_time.required' => 'Waktu selesai wajib diisi.',
-            'end_time.after' => 'Waktu selesai harus setelah waktu mulai.',
-            'id_paket.required' => 'ID paket wajib diisi.',
-            'id_paket.exists' => 'ID paket tidak ditemukan dalam tabel paket.',
-            'id_mapel.required' => 'ID mata pelajaran wajib diisi.',
-            'id_mapel.exists' => 'ID mata pelajaran tidak ditemukan dalam tabel mapel.',
-            'id_guru.required' => 'ID guru wajib diisi.',
-            'id_guru.exists' => 'ID guru tidak ditemukan dalam tabel guru.',
-            'id_payment.required' => 'ID pembayaran wajib diisi.',
-            'id_payment.exists' => 'ID pembayaran tidak ditemukan dalam tabel payment.',
+            'hari.required' => 'Kolom wajib diisi!',
+            'start_time.required' => 'Kolom wajib diisi!',
+            'start_time.after_or_equal' => 'Bimble buka pukul 08:00 AM!',
+            'start_time.before_or_equal' => 'Waktu mulai harus sebelum atau sama dengan 21:00!',
+            'end_time.required' => 'Kolom wajib diisi!',
+            'end_time.after' => 'Waktu selesai harus setelah waktu mulai!',
+            'end_time.before_or_equal' => 'Bimble tutup pukul 09.00 PM!',
+            'id_guru.required' => 'Kolom wajib diisi!',
+            'id_payment.required' => 'Kolom wajib diisi!',
         ]);
-
-        // Mengonversi format datetime dari 'Y-m-d\TH:i' ke 'Y-m-d H:i:s'
-        $validatedData['start_time'] = Carbon::createFromFormat('Y-m-d\TH:i', $validatedData['start_time'])->format('Y-m-d H:i:s');
-        $validatedData['end_time'] = Carbon::createFromFormat('Y-m-d\TH:i', $validatedData['end_time'])->format('Y-m-d H:i:s');
-
+        
         // Membuat jadwal baru
         Jadwal::create($validatedData);
 
@@ -106,29 +98,22 @@ class JadwalController extends Controller
     {
         // Validasi data yang diterima
         $validatedData = $request->validate([
-            'start_time' => 'required|date',
-            'end_time' => 'required|date|after:start_time',
-            'id_paket' => 'required|exists:paket,id_paket',
-            'id_mapel' => 'required|exists:mapel,id_mapel',
+            'hari' => 'required',
+            'start_time' => 'required|after_or_equal:08:00|before_or_equal:21:00',
+            'end_time' => 'required|after:start_time|before_or_equal:21:00',
             'id_guru' => 'required|exists:guru,id_guru',
             'id_payment' => 'required|exists:payment,id_payment',
         ], [
-            'start_time.required' => 'Waktu mulai wajib diisi.',
-            'end_time.required' => 'Waktu selesai wajib diisi.',
-            'end_time.after' => 'Waktu selesai harus setelah waktu mulai.',
-            'id_paket.required' => 'ID paket wajib diisi.',
-            'id_paket.exists' => 'ID paket tidak ditemukan dalam tabel paket.',
-            'id_mapel.required' => 'ID mata pelajaran wajib diisi.',
-            'id_mapel.exists' => 'ID mata pelajaran tidak ditemukan dalam tabel mapel.',
-            'id_guru.required' => 'ID guru wajib diisi.',
-            'id_guru.exists' => 'ID guru tidak ditemukan dalam tabel guru.',
-            'id_payment.required' => 'ID pembayaran wajib diisi.',
-            'id_payment.exists' => 'ID pembayaran tidak ditemukan dalam tabel payment.',
+            'hari.required' => 'Kolom wajib diisi!',
+            'start_time.required' => 'Kolom wajib diisi!',
+            'start_time.after_or_equal' => 'Bimble buka pukul 08:00 AM!',
+            'start_time.before_or_equal' => 'Waktu mulai harus sebelum atau sama dengan 21:00!',
+            'end_time.required' => 'Kolom wajib diisi!',
+            'end_time.after' => 'Waktu selesai harus setelah waktu mulai!',
+            'end_time.before_or_equal' => 'Bimble tutup pukul 09.00 PM!',
+            'id_guru.required' => 'Kolom wajib diisi!',
+            'id_payment.required' => 'Kolom wajib diisi!',
         ]);
-
-        // Mengonversi format datetime dari 'Y-m-d\TH:i' ke 'Y-m-d H:i:s'
-        $validatedData['start_time'] = Carbon::createFromFormat('Y-m-d\TH:i', $validatedData['start_time'])->format('Y-m-d H:i:s');
-        $validatedData['end_time'] = Carbon::createFromFormat('Y-m-d\TH:i', $validatedData['end_time'])->format('Y-m-d H:i:s');
 
         // Memperbarui data jadwal
         $jadwal->update($validatedData);

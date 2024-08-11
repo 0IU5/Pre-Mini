@@ -10,7 +10,10 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\JadwalPaketController;
+use App\Http\Controllers\JaketController;
 use App\Http\Controllers\SearchController;
+use App\Models\Jaket;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -55,6 +58,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('paket', PaketController::class);
     Route::resource('guru', GuruController::class);
     Route::resource('mapel', MapelController::class);
+    Route::resource('jaket', JaketController::class);
 
     Route::get('/search', [SearchController::class, 'index'])->name('search');
 });

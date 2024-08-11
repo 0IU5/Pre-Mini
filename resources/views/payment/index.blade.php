@@ -5,21 +5,20 @@
     <div class="min-h-screen mx-auto max-w-5xl pt-12">
         <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Daftar Pembayaran</h2>
 
-        <div class="relative z-0">
-            <form method="GET" action="{{ route('payment.index') }}">
+        <div class="flex justify-end mb-4">
+            <form method="GET" action="{{ route('payment.index') }}" class="relative w-full max-w-sm">
                 <label for="table-search" class="sr-only">Search</label>
-                <div class="relative mb-4">
+                <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                         </svg>
                     </div>
-                    <input type="text" id="table-search" name="search" value="{{ request()->input('search') }}" class="block pl-10 w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for payments">
+                    <input type="text" id="table-search" name="search" value="{{ request()->input('search') }}" class="block pl-10 w-64 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for payments">
                 </div>
             </form>
-        </div>
+        </div>        
 
-        <!-- Rest of the view remains unchanged -->
         @if (session('success'))
             <div id="alert-success" class="bg-green-700 text-white py-2 px-4 mb-4 rounded flex justify-between items-center">
                 {{ session('success') }}
@@ -38,6 +37,12 @@
                 <button onclick="document.getElementById('alert-delete').style.display='none'" class="text-white ml-4">&times;</button>
             </div>
         @endif
+        @if (session('error'))
+            <div id="alert-error" class="bg-red-700 text-white py-2 px-4 mb-4 rounded flex justify-between items-center">
+                {{ session('error') }}
+                <button onclick="document.getElementById('alert-error').style.display='none'" class="text-white ml-4">&times;</button>
+            </div>
+        @endif
 
         <div class="mb-4">
             <a href="{{ route('payment.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
@@ -46,7 +51,7 @@
         </div>
 
         <div class="overflow-x-auto">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 rounded-lg border border-gray-200 dark:border-gray-700">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 rounded-lg border border-gray-200 dark:border-gray-700 whitespace-nowrap">
                 <thead class="bg-gray-800 text-gray-200">
                     <tr>
                         <th class="py-3 px-6">Nama</th>
@@ -62,17 +67,17 @@
                 <tbody>
                     @forelse ($payments as $payment)
                         <tr class="bg-gray-700 border-b border-gray-600">
-                            <td class="py-4 px-6 text-white">{{ $payment->nama }}</td>
-                            <td class="py-4 px-6 text-white">{{ $payment->no_hp }}</td>
-                            <td class="py-4 px-6 text-white">{{ $payment->paket->paket ?? '-' }}</td> 
-                            <td class="py-4 px-6 text-lg text-white">
+                            <td class="py-4 px-6 text-sm font-medium text-white">{{ $payment->nama }}</td>
+                            <td class="py-4 px-6 text-sm font-medium text-white">{{ $payment->no_hp }}</td>
+                            <td class="py-4 px-6 text-sm font-medium text-white">{{ $payment->paket->paket ?? '-' }}</td> 
+                            <td class="py-4 px-6 text-sm font-medium text-white">
                                 @if($payment->paket && $payment->paket->harga)
                                     Rp {{ number_format($payment->paket->harga, 0, ',', '.') }}
                                 @else
                                     -
                                 @endif
                             </td>
-                            <td class="py-4 px-6 text-white">{{ $payment->metode_pembayaran }}</td>
+                            <td class="py-4 px-6 text-sm font-medium text-white">{{ ucfirst($payment->metode_pembayaran) }}</td> <!-- Huruf depan menjadi besar -->
                             <td class="py-4 px-6">
                                 @if($payment->bukti_transaksi)
                                     <img src="{{ asset('storage/' . $payment->bukti_transaksi) }}" alt="Bukti Transaksi" class="w-20">
@@ -80,7 +85,7 @@
                                     -
                                 @endif
                             </td>
-                            <td class="py-4 px-6 text-white">{{ \Carbon\Carbon::parse($payment->tanggal_transaksi)->format('d M Y H:i') }}</td>
+                            <td class="py-4 px-6 text-sm font-medium text-white">{{ \Carbon\Carbon::parse($payment->tanggal_transaksi)->format('d M Y h:i A') }}</td>
                             <td class="py-4 px-6 flex space-x-2">
                                 <a href="{{ route('payment.edit', $payment->id_payment) }}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition">Edit</a>
                                 <button type="button" onclick="showModal({{ $payment->id_payment }})" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Hapus</button>
@@ -114,7 +119,7 @@
                         </div>
                     @empty
                         <tr>
-                            <td colspan="8" class="px-4 py-3 text-center text-white">Tidak ada data pembayaran.</td>
+                            <td colspan="8" class="px-4 py-3 text-center text-white">Data tidak ada.</td>
                         </tr>
                     @endforelse
                 </tbody>

@@ -15,6 +15,7 @@ class Jadwal extends Model
     protected $keyType = 'int';
 
     protected $fillable = [
+        'hari',
         'start_time',
         'end_time',
         'id_paket',
@@ -22,16 +23,6 @@ class Jadwal extends Model
         'id_guru',
         'id_payment',
     ];
-
-    public function paket()
-    {
-        return $this->belongsTo(Paket::class, 'id_paket');
-    }
-
-    public function mapel()
-    {
-        return $this->belongsTo(Mapel::class, 'id_mapel');
-    }
 
     public function guru()
     {

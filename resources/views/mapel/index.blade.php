@@ -15,6 +15,12 @@
                 </div>
             @endif
 
+            @if (session('error'))
+            <div class="mb-4 p-4 text-red-800 bg-red-100 rounded-lg dark:bg-red-900 dark:text-red-300" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
+
             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                 <thead class="bg-gray-50 dark:bg-gray-800">
                     <tr>
