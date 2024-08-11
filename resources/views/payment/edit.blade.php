@@ -5,6 +5,13 @@
     <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
         <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Edit Pembayaran</h2>
 
+            <!-- Menampilkan pesan error jika ada konflik -->
+            @if ($errors->has('conflict'))
+                <div class="bg-red-500 text-white p-3 rounded-md mb-4">
+                    {{ $errors->first('conflict') }}
+                </div>
+            @endif
+
         <form action="{{ route('payment.update', $payment->id_payment) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
