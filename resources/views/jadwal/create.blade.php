@@ -6,6 +6,13 @@
         <div class="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Buat Jadwal Baru</h2>
 
+            <!-- Menampilkan pesan error jika ada konflik -->
+            @if ($errors->has('conflict'))
+                <div class="bg-red-500 text-white p-3 rounded-md mb-4">
+                    {{ $errors->first('conflict') }}
+                </div>
+            @endif
+
             <form action="{{ route('jadwal.store') }}" method="POST">
                 @csrf
                 <div class="space-y-6">

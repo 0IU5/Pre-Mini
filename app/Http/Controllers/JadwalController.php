@@ -59,7 +59,20 @@ class JadwalController extends Controller
             'id_guru.required' => 'Kolom wajib diisi!',
             'id_payment.required' => 'Kolom wajib diisi!',
         ]);
-        
+
+        // Cek apakah guru sudah mengajar di jadwal yang sama
+        $conflict = Jadwal::where('id_guru', $request->id_guru)
+            ->where('hari', $request->hari)
+            ->where(function($query) use ($request) {
+                $query->whereBetween('start_time', [$request->start_time, $request->end_time])
+                    ->orWhereBetween('end_time', [$request->start_time, $request->end_time]);
+            })
+            ->exists();
+
+        if ($conflict) {
+            return back()->withErrors(['conflict' => 'Guru ini sudah mengajar di jadwal lain pada hari dan jam yang sama!'])->withInput();
+        }
+
         // Membuat jadwal baru
         Jadwal::create($validatedData);
 
@@ -114,10 +127,24 @@ class JadwalController extends Controller
             'id_guru.required' => 'Kolom wajib diisi!',
             'id_payment.required' => 'Kolom wajib diisi!',
         ]);
-
+    
+        // Cek apakah guru sudah mengajar di jadwal yang sama, kecuali jadwal yang sedang diedit
+        $conflict = Jadwal::where('id_guru', $request->id_guru)
+            ->where('hari', $request->hari)
+            ->where('id_guru', '!=', $jadwal->id_guru)
+            ->where(function($query) use ($request) {
+                $query->whereBetween('start_time', [$request->start_time, $request->end_time])
+                      ->orWhereBetween('end_time', [$request->start_time, $request->end_time]);
+            })
+            ->exists();
+    
+        if ($conflict) {
+            return back()->withErrors(['conflict' => 'Guru ini sudah mengajar di jadwal lain pada hari dan jam yang sama!'])->withInput();
+        }
+    
         // Memperbarui data jadwal
         $jadwal->update($validatedData);
-
+    
         // Redirect dengan pesan sukses
         return redirect()->route('jadwal.index')->with('success', 'Data jadwal berhasil diperbarui.');
     }
@@ -131,6 +158,6 @@ class JadwalController extends Controller
         $jadwal->delete();
 
         // Redirect dengan pesan sukses
-        return redirect()->route('jadwal.index')->with('delete', 'Data jadwal berhasil dihapus.');
+        return redirect()->route('jadwal.index')->with('success', 'Data jadwal berhasil dihapus.');
     }
 }
