@@ -51,7 +51,7 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi data yang diterima
+        // Validasi data yang diterima di store method
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
             'umur' => 'required|integer|min:1|max:100',
@@ -59,11 +59,11 @@ class GuruController extends Controller
             'pendidikan_terakhir' => 'required|string|max:255',
             'id_mapel' => 'required|exists:mapel,id_mapel' // Validasi ID mata pelajaran
         ],[
-            'nama.required' => 'Kolom wajib diisi',
-            'umur.required' => 'Kolom diisi',
-            'umur.integer' => 'Usia harus berupa angka',
-            'umur.min' => 'Usia minimal 1!',
-            'umur.max' => 'Usia maksimal 100!',
+            'nama.required' => 'Kolom nama wajib diisi',
+            'umur.required' => 'Kolom umur wajib diisi',
+            'umur.integer' => 'Umur harus berupa angka',
+            'umur.min' => 'Umur minimal 1!',
+            'umur.max' => 'Umur maksimal 100!',
             'foto.image' => 'Foto harus berupa gambar',
             'pendidikan_terakhir.required' => 'Pendidikan terakhir wajib diisi',
             'id_mapel.required' => 'Mata pelajaran wajib dipilih',
@@ -108,7 +108,7 @@ class GuruController extends Controller
      */
     public function update(Request $request, Guru $guru)
     {
-        // Validasi data yang diterima
+        // Validasi yang sama di update method
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
             'umur' => 'required|integer|min:1|max:100',
@@ -116,11 +116,11 @@ class GuruController extends Controller
             'pendidikan_terakhir' => 'required|string|max:255',
             'id_mapel' => 'required|exists:mapel,id_mapel' // Validasi ID mata pelajaran
         ],[
-            'nama.required' => 'Kolom wajib diisi',
-            'umur.required' => 'Kolom diisi',
-            'umur.integer' => 'Usia harus berupa angka',
-            'umur.min' => 'Usia minimal 1!',
-            'umur.max' => 'Usia maksimal 100!',
+            'nama.required' => 'Kolom nama wajib diisi',
+            'umur.required' => 'Kolom umur wajib diisi',
+            'umur.integer' => 'Umur harus berupa angka',
+            'umur.min' => 'Umur minimal 1!',
+            'umur.max' => 'Umur maksimal 100!',
             'foto.image' => 'Foto harus berupa gambar',
             'pendidikan_terakhir.required' => 'Pendidikan terakhir wajib diisi',
             'id_mapel.required' => 'Mata pelajaran wajib dipilih',

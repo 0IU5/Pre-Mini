@@ -131,6 +131,6 @@ class JadwalController extends Controller
         $jadwal->delete();
 
         // Redirect dengan pesan sukses
-        return redirect()->route('jadwal.index')->with('success', 'Data jadwal berhasil dihapus.');
+        return redirect()->route('jadwal.index')->with('delete', 'Data jadwal berhasil dihapus.');
     }
 }

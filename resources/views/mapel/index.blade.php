@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="bg-gray-600">
-    <div class="py-8 px-4 mx-auto max-w-7xl lg:py-16">
+    <div class="py-8 px-4 mx-auto max-w-5xl lg:py-16">
         <div class="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Daftar Mata Pelajaran</h2>

@@ -32,6 +32,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <a href="{{ route('paket.index') }}" class="ml-4 bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:ring-4 focus:ring-gray-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-700">Kembali</a>
             </div>
         </div>
     </div>
