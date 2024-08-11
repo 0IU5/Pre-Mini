@@ -147,6 +147,12 @@ class PaymentController extends Controller
      */
     public function destroy(Payment $payment)
     {
+        // Mengecek apakah pembayaran sedang digunakan dalam relasi dengan Jadwal
+        if ($payment->jadwal()->exists()) {
+            // Redirect dengan pesan error jika pembayaran sedang digunakan
+            return redirect()->route('payment.index')->with('error', 'Pembayaran tidak dapat dihapus karena sedang digunakan!');
+        }
+
         // Hapus gambar bukti transaksi jika ada
         if ($payment->bukti_transaksi) {
             Storage::disk('public')->delete($payment->bukti_transaksi);
@@ -158,6 +164,4 @@ class PaymentController extends Controller
         // Redirect dengan pesan sukses
         return redirect()->route('payment.index')->with('success', 'Data pembayaran berhasil dihapus.');
     }
-
-    
 }

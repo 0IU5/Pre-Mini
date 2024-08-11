@@ -17,8 +17,4 @@ class Mapel extends Model
         'mapel', 'deskripsi'
     ];
 
-    public function jadwal()
-    {
-        return $this->hasMany(Jadwal::class,'id_jadwal');
-    }
 }

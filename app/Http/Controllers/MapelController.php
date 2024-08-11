@@ -95,12 +95,17 @@ class MapelController extends Controller
     /**
      * Menghapus mata pelajaran dari penyimpanan.
      */
-    public function destroy(Mapel $mapel)
+    public function destroy($id)
     {
-        // Menghapus mata pelajaran
-        $mapel->delete();
+        $mapel = Mapel::findOrFail($id);
+        
+        // Cek apakah ada jadwal yang terkait dengan mata pelajaran ini
+        if ($mapel->jadwal()->exists()) {
+            return redirect()->route('mapel.index')->with('error', 'Mata pelajaran ini sedang digunakan dalam jadwal dan tidak dapat dihapus.');
+        }
 
-        // Redirect dengan pesan sukses
-        return redirect()->route('mapel.index')->with('success', 'Data mata pelajaran berhasil dihapus.');
+        $mapel->delete();
+        return redirect()->route('mapel.index')->with('success', 'Mata pelajaran berhasil dihapus.');
     }
+
 }

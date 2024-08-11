@@ -14,7 +14,7 @@
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M1 8.5A7.5 7.5 0 1 1 8.5 1 7.5 7.5 0 0 1 1 8.5zm7.5-5A5.5 5.5 0 1 0 13 8.5 5.5 5.5 0 0 0 8.5 3.5zm-1 2h2v2H7.5V5.5z"/>
         </svg>
       </span>
-      <input type="text" id="nama" name="nama" value="{{ old('nama', $feedback->nama) }}" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-r-md dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400" placeholder="Masukkan nama" required>
+      <input type="text" id="nama" name="nama" value="{{ old('nama') ?? $feedback->nama }}" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-r-md dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400" placeholder="Masukkan nama">
     </div>
     @error('nama')
     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
@@ -30,7 +30,7 @@
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2 4.5h12v7H2v-7zm0-1v-1.5h12V3.5h-12zM1 8.5v-4h14v4H1zm1 2.5h12v1H2v-1z"/>
         </svg>
       </span>
-      <input type="email" id="email" name="email" value="{{ old('email', $feedback->email) }}" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-r-md dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400" placeholder="Masukkan email" required>
+      <input type="email" id="email" name="email" value="{{ old('email') ?? $feedback->email }}" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-r-md dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400" placeholder="Masukkan email">
     </div>
     @error('email')
     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
@@ -40,7 +40,7 @@
   <!-- Feedback -->
   <div class="mb-6">
     <label for="feedback" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Feedback</label>
-    <textarea id="feedback" name="feedback" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400" placeholder="Masukkan feedback" required>{{ old('feedback', $feedback->feedback) }}</textarea>
+    <textarea id="feedback" name="feedback" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400" placeholder="Masukkan feedback">{{ old('feedback') ?? $feedback->feedback }}</textarea>
     @error('feedback')
     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
     @enderror

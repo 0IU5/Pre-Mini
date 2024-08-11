@@ -11,10 +11,24 @@
                 @method('PUT')
                 <div class="space-y-6">
                     <div>
-                        <label for="id_guru" class="block text-sm font-medium text-gray-700 dark:text-white">Nama Guru</label>
+                        <label for="id_payment" class="block text-sm font-medium text-gray-700 dark:text-white">Nama Siswa dan Paket</label>
+                        <select name="id_payment" id="id_payment" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                            <option value="" disabled {{ old('id_payment') == '' ? 'selected' : '' }}>Pilih Nama Siswa dan Paket</option>
+                            @foreach ($payment as $item)
+                                <option value="{{ $item->id_payment }}" {{ $jadwal->id_payment == $item->id_payment ? 'selected' : '' }}>{{ $item->nama }} - {{ $item->paket->paket }}</option>
+                            @endforeach
+                        </select>
+                        @error('id_payment')
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    
+                    <div>
+                        <label for="id_guru" class="block text-sm font-medium text-gray-700 dark:text-white">Nama Guru dan Mapel</label>
                         <select name="id_guru" id="id_guru" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                            <option value="" disabled {{ old('id_guru') == '' ? 'selected' : '' }}>Pilih Nama Guru dan Mapel</option>
                             @foreach ($guru as $item)
-                                <option value="{{ $item->id_guru }}" {{ $jadwal->id_guru == $item->id_guru ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                <option value="{{ $item->id_guru }}" {{ $jadwal->id_guru == $item->id_guru ? 'selected' : '' }}>{{ $item->nama }} - {{ $item->mapel->mapel }}</option>
                             @endforeach
                         </select>
                         @error('id_guru')
@@ -23,44 +37,26 @@
                     </div>
 
                     <div>
-                        <label for="id_payment" class="block text-sm font-medium text-gray-700 dark:text-white">Nama Pembayaran</label>
-                        <select name="id_payment" id="id_payment" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                            @foreach ($payment as $item)
-                                <option value="{{ $item->id_payment }}" {{ $jadwal->id_payment == $item->id_payment ? 'selected' : '' }}>{{ $item->nama }}</option>
-                            @endforeach
+                        <label for="hari" class="block text-sm font-medium text-gray-700 dark:text-white">Hari</label>
+                        <select name="hari" id="hari" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                            <option value="" disabled {{ old('id_jadwal') == '' ? 'selected' : '' }}>Pilih Hari</option>
+                            <option value="Senin" {{ old('hari', $jadwal->hari ?? '') == 'Senin' ? 'selected' : '' }}>Senin</option>
+                            <option value="Selasa" {{ old('hari', $jadwal->hari ?? '') == 'Selasa' ? 'selected' : '' }}>Selasa</option>
+                            <option value="Rabu" {{ old('hari', $jadwal->hari ?? '') == 'Rabu' ? 'selected' : '' }}>Rabu</option>
+                            <option value="Kamis" {{ old('hari', $jadwal->hari ?? '') == 'Kamis' ? 'selected' : '' }}>Kamis</option>
+                            <option value="Jumat" {{ old('hari', $jadwal->hari ?? '') == 'Jumat' ? 'selected' : '' }}>Jumat</option>
+                            <option value="Sabtu" {{ old('hari', $jadwal->hari ?? '') == 'Sabtu' ? 'selected' : '' }}>Sabtu</option>
+                            <option value="Minggu" {{ old('hari', $jadwal->hari ?? '') == 'Minggu' ? 'selected' : '' }}>Minggu</option>
                         </select>
-                        @error('id_payment')
+                        @error('hari')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
-                    </div>
-
-                    <div>
-                        <label for="id_paket" class="block text-sm font-medium text-gray-700 dark:text-white">Paket</label>
-                        <select name="id_paket" id="id_paket" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                            @foreach ($paket as $item)
-                                <option value="{{ $item->id_paket }}" {{ $jadwal->id_paket == $item->id_paket ? 'selected' : '' }}>{{ $item->paket }}</option>
-                            @endforeach
-                        </select>
-                        @error('id_paket')
-                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div>
-                        <label for="id_mapel" class="block text-sm font-medium text-gray-700 dark:text-white">Mata Pelajaran</label>
-                        <select name="id_mapel" id="id_mapel" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                            @foreach ($mapel as $item)
-                                <option value="{{ $item->id_mapel }}" {{ $jadwal->id_mapel == $item->id_mapel ? 'selected' : '' }}>{{ $item->mapel }}</option>
-                            @endforeach
-                        </select>
-                        @error('id_mapel')
-                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
-                        @enderror
-                    </div>
-
+                    </div>                
+                    
                     <div>
                         <label for="start_time" class="block text-sm font-medium text-gray-700 dark:text-white">Waktu Mulai</label>
-                        <input type="datetime-local" name="start_time" id="start_time" value="{{ old('start_time', $jadwal->start_time) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <input type="time" name="start_time" id="start_time" value="{{ old('start_time', $jadwal->start_time) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <option value="" disabled {{ old('id_jadwal') == '' ? 'selected' : '' }}>Pilih waktu mulai</option>
                         @error('start_time')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
@@ -68,7 +64,8 @@
 
                     <div>
                         <label for="end_time" class="block text-sm font-medium text-gray-700 dark:text-white">Waktu Selesai</label>
-                        <input type="datetime-local" name="end_time" id="end_time" value="{{ old('end_time', $jadwal->end_time) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <input type="time" name="end_time" id="end_time" value="{{ old('end_time', $jadwal->end_time) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <option value="" disabled {{ old('id_jadwal') == '' ? 'selected' : '' }}>Pilih waktu berakhir</option>
                         @error('end_time')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
