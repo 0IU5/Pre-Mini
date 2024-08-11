@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="bg-gray-600">
-    <div class="py-8 px-4 mx-auto max-w-5xl lg:py-16">
+    <div class="py-8 px-4 mx-auto max-w-6xl lg:py-20">
         <div class="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
             <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6 text-center">Detail Jadwal Paket</h2>
             
@@ -11,11 +11,10 @@
                 <a href="{{ route('jaket.create') }}" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800 mr-4">
                     Tambah Jadwal Paket
                 </a>
-                <a href="{{ route('jadwal.index') }}" class="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:ring-4 focus:ring-green-300 dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-800">
+                <a href="{{ route('jadwal.index') }}" class="bg-green-700 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:ring-4 focus:ring-green-300 dark:bg-green-700 dark:hover:bg-green-600 dark:focus:ring-green-800">
                     Lihat Jadwal Siswa
                 </a>
             </div>
-            
             
             @if (session('success'))
                 <div id="alert-success" class="bg-green-700 text-white py-2 px-4 mb-4 rounded flex justify-between items-center">
@@ -39,7 +38,7 @@
                 </div>
             @endif
             
-            <div class="overflow-x-auto">
+            <div class="relative overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 border border-gray-200 dark:border-gray-700">
                     <thead class="bg-gray-50 dark:bg-gray-800">
                         <tr>
@@ -65,6 +64,12 @@
                         @endforeach
                     </tbody>
                 </table>
+                <!-- Button placed at the bottom-right corner -->
+                <div class="flex justify-end mt-4">
+                    <a href="{{ route('paket.index') }}" class="bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:ring-4 focus:ring-gray-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-700">
+                        Kembali
+                    </a>
+                </div>
             </div>
         </div>
     </div>
