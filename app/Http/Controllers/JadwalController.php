@@ -47,11 +47,19 @@ class JadwalController extends Controller
             'id_payment.required' => 'Kolom wajib diisi!',
         ]);
 
-        $conflict = Jadwal::where('hari', $request->hari)
-            ->where('start_time', '<', $request->end_time)
-            ->where('end_time', '>', $request->start_time)
-            ->where('id_guru', $request->id_guru)
-            ->first();
+        // Ambil id_mapel dari Guru berdasarkan id_guru yang dipilih
+        $guru = Guru::findOrFail($request->id_guru);
+        $validatedData['id_mapel'] = $guru->id_mapel;
+
+        // Cek apakah guru sudah mengajar di jadwal yang sama dengan paket yang sama
+        $conflict = Jadwal::where('id_guru', $request->id_guru)
+            ->where('hari', $request->hari)
+            ->where(function($query) use ($request) {
+                $query->whereBetween('start_time', [$request->start_time, $request->end_time])
+                    ->orWhereBetween('end_time', [$request->start_time, $request->end_time]);
+            })
+            ->where('id_payment', '!=', $request->id_payment)
+            ->exists();
 
         if ($conflict) {
             return back()->withErrors(['conflict' => 'Jadwal bentrok! Pilih jam lain atau ganti guru.']);
@@ -61,10 +69,7 @@ class JadwalController extends Controller
 
         return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditambahkan!');
     }
-    
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Jadwal $jadwal)
     {
         // Menampilkan detail jadwal tertentu
@@ -82,10 +87,9 @@ class JadwalController extends Controller
         return view('jadwal.edit', compact('jadwal', 'paket', 'mapel', 'guru', 'payment'));
     }
 
-    public function update(Request $request, $id_jadwal)
+    public function update(Request $request, Jadwal $jadwal)
     {
-        $jadwal = Jadwal::findOrFail($id_jadwal);
-
+        // Validasi data yang diterima
         $validatedData = $request->validate([
             'hari' => 'required',
             'start_time' => 'required|after_or_equal:08:00|before_or_equal:21:00',
@@ -104,20 +108,30 @@ class JadwalController extends Controller
             'id_payment.required' => 'Kolom wajib diisi!',
         ]);
 
-        $conflict = Jadwal::where('hari', $request->hari)
-            ->where('start_time', '<', $request->end_time)
-            ->where('end_time', '>', $request->start_time)
-            ->where('id_guru', $request->id_guru)
-            ->where('id_jadwal', '!=', $id_jadwal)
-            ->first();
+        // Ambil id_mapel dari Guru berdasarkan id_guru yang dipilih
+        $guru = Guru::findOrFail($request->id_guru);
+        $validatedData['id_mapel'] = $guru->id_mapel;
+
+        // Cek apakah guru sudah mengajar di jadwal yang sama dengan paket yang sama, kecuali jadwal yang sedang diedit
+        $conflict = Jadwal::where('id_guru', $request->id_guru)
+            ->where('hari', $request->hari)
+            ->where('id_jadwal', '!=', $jadwal->id_jadwal)
+            ->where(function($query) use ($request) {
+                $query->whereBetween('start_time', [$request->start_time, $request->end_time])
+                      ->orWhereBetween('end_time', [$request->start_time, $request->end_time]);
+            })
+            ->where('id_payment', '!=', $request->id_payment)
+            ->exists();
 
         if ($conflict) {
-            return back()->withErrors(['conflict' => 'Jadwal bentrok! Pilih jam lain atau ganti guru.']);
+            return back()->withErrors(['conflict' => 'Guru ini sudah mengajar di jadwal lain pada hari dan jam yang sama dengan paket yang berbeda!'])->withInput();
         }
 
+        // Memperbarui data jadwal
         $jadwal->update($validatedData);
 
-        return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil diperbarui!');
+        // Redirect dengan pesan sukses
+        return redirect()->route('jadwal.index')->with('success', 'Data jadwal berhasil diperbarui.');
     }
 
     public function destroy($id_jadwal)
