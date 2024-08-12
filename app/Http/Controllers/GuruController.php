@@ -151,16 +151,16 @@ class GuruController extends Controller
      */
     public function destroy(Guru $guru)
     {
-        // Mengecek apakah pembayaran sedang digunakan dalam relasi dengan Jadwal
-        if ($guru->jadwal()->exists()) {
-            // Redirect dengan pesan error jika pembayaran sedang digunakan
-            return redirect()->route('guru.index')->with('error', 'Pembayaran tidak dapat dihapus karena sedang digunakan!');
+        try {
+            if ($guru->jadwal()->exists()) {
+                return redirect()->route('guru.index')->with('error', 'Guru tidak dapat dihapus karena sedang digunakan dalam jadwal!');
+            }
+
+            $guru->delete();
+
+            return redirect()->route('guru.index')->with('success', 'Guru berhasil dihapus.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('guru.index')->with('error', 'Gagal menghapus guru karena terkait dengan data lain.');
         }
-
-        // Menghapus pembayaran
-        $guru->delete();
-
-        // Redirect dengan pesan sukses
-        return redirect()->route('guru.index')->with('success', 'Data pembayaran berhasil dihapus.');
     }
 }
