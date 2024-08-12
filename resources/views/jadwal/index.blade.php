@@ -40,12 +40,11 @@
                     </p>
 
                     <div style="text-align: center; margin-top: 35px;">
-                        <a href="{{ route('jadwal.show', $data->id_jadwal) }}" class="bg-green-500 text-white px-6 py-2 hover:bg-green-600 transition" style="border-radius: 20px; width: 150px; text-align: center;">Detail</a>
+                        <button onclick="showModal({{ $data->id_jadwal }})" class="bg-green-500 text-white px-6 py-2 hover:bg-green-600 transition" style="border-radius: 20px; width: 150px; text-align: center;">Detail</button>
                     </div>
                 </div>
                 <div class="p-4 bg-gray-50 dark:bg-gray-700 flex justify-between">
                     <a href="{{ route('jadwal.edit', $data->id_jadwal) }}" class="text-yellow-600 dark:text-yellow-500 hover:underline">Edit</a>
-                    <button onclick="showModal({{ $data->id_jadwal }})" class="text-red-600 dark:text-red-500 hover:underline">Delete</button>
                 </div>
             </div>
 
@@ -58,19 +57,52 @@
                         </svg>
                         <span class="sr-only">Close modal</span>
                     </button>
-                    <div class="p-4 md:p-5 text-center">
-                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                        </svg>
-                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this jadwal?</h3>
-                        <form action="{{ route('jadwal.destroy', $data->id_jadwal) }}" method="POST">
+                    <div id="modal-content-{{ $data->id_jadwal }}" class="p-4 md:p-5 text-center">
+                        <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">Jadwal Siswa Bimbel</h2>
+                        <p class="text-gray-700 dark:text-gray-300 font-semibold mb-2">
+                            Nama Guru: 
+                            @if ($data->guru && is_object($data->guru))
+                                <span class="font-normal text-lg">{{ $data->guru->nama ?? '-' }}</span>
+                            @else
+                                <span class="font-normal text-lg">-</span>
+                            @endif
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300 font-semibold mb-2">
+                            Mapel: 
+                            @if ($data->guru && $data->guru->mapel && is_object($data->guru->mapel))
+                                <span class="font-normal text-lg">{{ $data->guru->mapel->mapel ?? '-' }}</span>
+                            @else
+                                <span class="font-normal text-lg">-</span>
+                            @endif
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300 font-semibold mb-2">
+                            Hari: 
+                            <span class="font-normal text-lg">{{ $data->hari ?? '-' }}</span>
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300 font-semibold mb-2">
+                            Start: 
+                            <span class="font-normal text-lg">{{ \Carbon\Carbon::parse($data->start_time)->format('h:i A') ?? '-' }}</span>
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300 font-semibold mb-4">
+                            End: 
+                            <span class="font-normal text-lg">{{ \Carbon\Carbon::parse($data->end_time)->format('h:i A' ) ?? '-' }}</span>
+                        </p>
+
+                        <!-- Button Delete Confirmation -->
+                        <button id="confirm-delete-button-{{ $data->id_jadwal }}" class="hidden text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center" onclick="confirmDelete({{ $data->id_jadwal }})">
+                            Yes, I'm sure
+                        </button>
+
+                        <!-- Form for Deleting -->
+                        <form id="delete-form-{{ $data->id_jadwal }}" action="{{ route('jadwal.destroy', $data->id_jadwal) }}" method="POST" class="hidden">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-                                Yes, I'm sure
-                            </button>
                         </form>
-                        <button onclick="hideModal({{ $data->id_jadwal }})" type="button" class="py-2.5 px-5 ml-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+
+                        <!-- Button to show the delete confirmation -->
+                        <button id="show-delete-confirmation-button-{{ $data->id_jadwal }}" class="text-red-600 dark:text-red-500 hover:underline" onclick="showDeleteConfirmation({{ $data->id_jadwal }})">
+                            Delete
+                        </button>
                     </div>
                 </div>
             </div>
@@ -85,11 +117,23 @@
 
 <script>
     function showModal(jadwalId) {
-        document.getElementById('popup-modal-' + jadwalId).classList.remove('hidden');
-    }
+    document.getElementById('popup-modal-' + jadwalId).classList.remove('hidden');
+    document.getElementById('confirm-delete-button-' + jadwalId).classList.add('hidden'); // Ensure "Yes, I'm sure" is hidden initially
+    document.getElementById('show-delete-confirmation-button-' + jadwalId).classList.remove('hidden'); // Ensure "Delete" button is visible initially
+}
 
-    function hideModal(jadwalId) {
-        document.getElementById('popup-modal-' + jadwalId).classList.add('hidden');
-    }
+function hideModal(jadwalId) {
+    document.getElementById('popup-modal-' + jadwalId).classList.add('hidden');
+}
+
+function showDeleteConfirmation(jadwalId) {
+    document.getElementById('confirm-delete-button-' + jadwalId).classList.remove('hidden');
+    document.getElementById('show-delete-confirmation-button-' + jadwalId).classList.add('hidden');
+}
+
+function confirmDelete(jadwalId) {
+    document.getElementById('delete-form-' + jadwalId).submit();
+}
+
 </script>
 @endsection
