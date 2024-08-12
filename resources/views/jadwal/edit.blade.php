@@ -6,10 +6,18 @@
         <div class="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Edit Jadwal</h2>
 
+            <!-- Menampilkan pesan error jika ada konflik -->
+            @if ($errors->has('conflict'))
+                <div class="bg-red-500 text-white p-3 rounded-md mb-4">
+                    {{ $errors->first('conflict') }}
+                </div>
+            @endif
+
             <form action="{{ route('jadwal.update', $jadwal->id_jadwal) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="space-y-6">
+                    <!-- Pilihan Nama Siswa dan Paket -->
                     <div>
                         <label for="id_payment" class="block text-sm font-medium text-gray-700 dark:text-white">Nama Siswa dan Paket</label>
                         <select name="id_payment" id="id_payment" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -23,6 +31,7 @@
                         @enderror
                     </div>
                     
+                    <!-- Pilihan Nama Guru dan Mapel -->
                     <div>
                         <label for="id_guru" class="block text-sm font-medium text-gray-700 dark:text-white">Nama Guru dan Mapel</label>
                         <select name="id_guru" id="id_guru" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -36,6 +45,7 @@
                         @enderror
                     </div>
 
+                    <!-- Pilihan Hari -->
                     <div>
                         <label for="hari" class="block text-sm font-medium text-gray-700 dark:text-white">Hari</label>
                         <select name="hari" id="hari" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -53,19 +63,19 @@
                         @enderror
                     </div>                
                     
+                    <!-- Waktu Mulai -->
                     <div>
                         <label for="start_time" class="block text-sm font-medium text-gray-700 dark:text-white">Waktu Mulai</label>
                         <input type="time" name="start_time" id="start_time" value="{{ old('start_time', $jadwal->start_time) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        <option value="" disabled {{ old('id_jadwal') == '' ? 'selected' : '' }}>Pilih waktu mulai</option>
                         @error('start_time')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
 
+                    <!-- Waktu Selesai -->
                     <div>
                         <label for="end_time" class="block text-sm font-medium text-gray-700 dark:text-white">Waktu Selesai</label>
                         <input type="time" name="end_time" id="end_time" value="{{ old('end_time', $jadwal->end_time) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        <option value="" disabled {{ old('id_jadwal') == '' ? 'selected' : '' }}>Pilih waktu berakhir</option>
                         @error('end_time')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror

@@ -13,6 +13,7 @@ class SearchController extends Controller
 
         $routes = [
             'payment' => 'payment.index',
+            'home' => 'dashboard',
             'jadwal' => 'jadwal.index',
             'feedback' => 'feedback.index',
             'mapel' => 'mapel.index',
