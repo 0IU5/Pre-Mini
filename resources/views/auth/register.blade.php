@@ -28,7 +28,7 @@
         </h2>
 
         <p class="mt-4 text-white/90 leading-relaxed">
-          Silakan lengkapi biodata Anda agar kami dapat mengenal Anda lebih baik.<br> Karena belum dikenal berarti belum berkenalan.
+          Silakan lengkapi biodata Anda agar kami dapat mengenal Anda lebih baik. Karena belum dikenal berarti belum berkenalan.
         </p>
       </div>
     </section>
@@ -63,16 +63,22 @@
 
           <!-- Jenjang Pendidikan -->
           <div class="relative z-0 w-full mb-5 group">
-            <x-input-label for="jenjang_pendidikan" :value="__('Jenjang Pendidikan')" class="text-gray-900 dark:text-gray-100" />
-            <x-text-input id="jenjang_pendidikan" class="block w-full px-0 bg-transparent border-0 border-b-2 border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-600 text-gray-900 dark:text-gray-100" type="text" name="jenjang_pendidikan" :value="old('jenjang_pendidikan')" />
-            <x-input-error :messages="$errors->get('jenjang_pendidikan')" class="mt-2 text-red-500" />
+              <x-input-label for="jenjang_pendidikan" :value="__('Jenjang Pendidikan')" class="text-gray-900 dark:text-gray-100 mb-4" />
+              <select id="jenjang_pendidikan" name="jenjang_pendidikan" class="block w-full border-b-2 border-gray-300 rounded-md shadow-sm dark:bg-gray-700 dark:border-gray-600">
+                  <option value="">Pilih Jenjang Pendidikan</option>
+                  <option value="SMP">SMP</option>
+                  <option value="SMA">SMA</option>
+              </select>
+              <x-input-error :messages="$errors->get('jenjang_pendidikan')" class="mt-2 text-red-500" />
           </div>
 
           <!-- Kelas -->
           <div class="relative z-0 w-full mb-5 group">
-            <x-input-label for="kelas" :value="__('Kelas')" class="text-gray-900 dark:text-gray-100" />
-            <x-text-input id="kelas" class="block w-full px-0 bg-transparent border-0 border-b-2 border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-600 text-gray-900 dark:text-gray-100" type="text" name="kelas" :value="old('kelas')" />
-            <x-input-error :messages="$errors->get('kelas')" class="mt-2 text-red-500" />
+              <x-input-label for="kelas" :value="__('Kelas')" class="text-gray-900 dark:text-gray-100 mb-4" />
+              <select id="kelas" name="kelas" class="block w-full border-b-2 border-gray-300 rounded-md shadow-sm dark:bg-gray-700 dark:border-gray-600">
+                  <option value="">Pilih Kelas</option>
+              </select>
+              <x-input-error :messages="$errors->get('kelas')" class="mt-2 text-red-500" />
           </div>
 
           <!-- Alamat -->
@@ -100,8 +106,39 @@
           <x-primary-button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             {{ __('Daftar') }}
           </x-primary-button>
+
+          <a href="{{ route('login') }}" class="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">Already registered?</a>
         </form>
       </div>
     </main>
   </div>
+
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const jenjangPendidikan = document.getElementById('jenjang_pendidikan');
+    const kelas = document.getElementById('kelas');
+
+    jenjangPendidikan.addEventListener('change', function () {
+        const selectedJenjang = this.value;
+        kelas.innerHTML = ''; // Kosongkan pilihan kelas
+
+        if (selectedJenjang === 'SMP') {
+            kelas.innerHTML = `
+                <option value="">Pilih Kelas</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            `;
+        } else if (selectedJenjang === 'SMA') {
+            kelas.innerHTML = `
+                <option value="">Pilih Kelas</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            `;
+        }
+    });
+});
+</script>
+
 </section>

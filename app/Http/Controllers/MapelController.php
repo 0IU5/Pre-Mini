@@ -107,5 +107,4 @@ class MapelController extends Controller
         $mapel->delete();
         return redirect()->route('mapel.index')->with('success', 'Mata pelajaran berhasil dihapus.');
     }
-
 }

@@ -15,11 +15,13 @@ return new class extends Migration
             $table->time('end_time'); // Waktu selesai
             $table->unsignedBigInteger('id_guru'); // Foreign key untuk guru
             $table->unsignedBigInteger('id_payment'); // Foreign key untuk pembayaran
+            $table->unsignedBigInteger('id_mapel'); // Foreign key untuk mapel
             $table->timestamps(); // Kolom timestamps (created_at dan updated_at)
             
             // Definisikan foreign key
             $table->foreign('id_guru')->references('id_guru')->on('guru')->onDelete('restrict');
             $table->foreign('id_payment')->references('id_payment')->on('payment')->onDelete('restrict');
+            $table->foreign('id_mapel')->references('id_mapel')->on('mapel')->onDelete('restrict');
         });
     }
 

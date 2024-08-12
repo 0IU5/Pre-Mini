@@ -33,4 +33,10 @@ class Jadwal extends Model
     {
         return $this->belongsTo(Payment::class, 'id_payment');
     }
+
+    // Tambahkan relasi ke model Mapel
+    public function mapel()
+    {
+        return $this->belongsTo(Mapel::class, 'id_mapel', 'id_mapel');
+    }
 }
