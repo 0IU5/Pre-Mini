@@ -3,6 +3,13 @@
 @section('content')
 <section class="bg-gray-100 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 min-h-screen">
     <div class="max-w-5xl mx-auto">
+        @if (session('success'))
+            <div id="alert-success" class="bg-green-700 text-white py-2 px-4 mb-4 rounded flex justify-between items-center">
+                {{ session('success') }}
+                <button onclick="document.getElementById('alert-success').style.display='none'" class="text-white ml-4">&times;</button>
+            </div>
+        @endif
+        
         <!-- Profile Header -->
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
             <div class="flex flex-col md:flex-row items-center justify-between">
@@ -15,12 +22,16 @@
                     </div>
                 </div>
                 <div class="flex flex-col space-y-2">
-                    <button class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-300">
-                        Upload Foto
-                    </button>
+                   <a href="">
+                        <button class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-300">
+                            Upload Foto
+                        </button>
+                   </a>
+                   <a href="">
                     <button class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-300">
                         Hapus Profil
                     </button>
+                   </a>
                 </div>
             </div>
         </div>
@@ -51,7 +62,7 @@
                 </div>
                 <div class="flex flex-col space-y-2 justify-center items-center ml-auto -mr-10">
                     <a href="{{ route('profile.edit') }}">
-                        <button class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-300">Edit</button>
+                        <button class="text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-300">Edit</button>
                     </a>
                 </div>
             </div>
