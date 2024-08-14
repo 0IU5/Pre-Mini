@@ -9,18 +9,23 @@
             <button onclick="document.getElementById('alert-success').style.display='none'" class="text-green-700 dark:text-green-300 ml-4">&times;</button>
         </div>
         @endif
-        @if (session('delete'))
-        <div id="alert-delete" class="bg-red-100 text-green-700 dark:bg-green-900 dark:text-red-300 py-3 px-5 mb-4 rounded flex justify-between items-center">
-            {{ session('delete') }}
-            <button onclick="document.getElementById('alert-delete').style.display='none'" class="text-red-700 dark:text-red-300 ml-4">&times;</button>
-        </div>
-        @endif
+
         <div class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white dark:bg-gray-900">
             <div>
                 <a href="{{ route('jadwal.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                     Tambah Jadwal
                 </a>
             </div>
+
+            <div class="ml-auto">
+                <form method="GET" action="{{ route('jadwal.index') }}">
+                    <input type="text" name="search" placeholder="Search nama siswa" value="{{ $search ?? '' }}" class="px-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">
+                    <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                        Cari
+                    </button>
+                </form>
+            </div>
+
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
@@ -32,15 +37,15 @@
                     </h2>
 
                     <p class="text-gray-700 dark:text-gray-300">
-                    @if ($data->payment && $data->payment->paket)
-                                {{ $data->payment->paket->paket ?? '-' }}
-                            @else
-                                -
-                            @endif
+                        @if ($data->payment && $data->payment->paket)
+                            {{ $data->payment->paket->paket ?? '-' }}
+                        @else
+                            -
+                        @endif
                     </p>
 
-                    <div style="text-align: center; margin-top: 35px;">
-                        <button onclick="showModal({{ $data->id_jadwal }})" class="bg-green-500 text-white px-6 py-2 hover:bg-green-600 transition" style="border-radius: 20px; width: 150px; text-align: center;">Detail</button>
+                    <div class="text-center mt-6">
+                        <button onclick="showModal({{ $data->id_jadwal }})" class="bg-green-500 text-white px-6 py-2 hover:bg-green-600 transition rounded-full w-36">Detail</button>
                     </div>
                 </div>
                 <div class="p-4 bg-gray-50 dark:bg-gray-700 flex justify-between">
@@ -108,7 +113,7 @@
             </div>
             @empty
             <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4 text-center text-gray-500 dark:text-gray-400">
-                No data available
+                Data tidak ada.
             </div>
             @endforelse
         </div>
@@ -117,23 +122,22 @@
 
 <script>
     function showModal(jadwalId) {
-    document.getElementById('popup-modal-' + jadwalId).classList.remove('hidden');
-    document.getElementById('confirm-delete-button-' + jadwalId).classList.add('hidden'); // Ensure "Yes, I'm sure" is hidden initially
-    document.getElementById('show-delete-confirmation-button-' + jadwalId).classList.remove('hidden'); // Ensure "Delete" button is visible initially
-}
+        document.getElementById('popup-modal-' + jadwalId).classList.remove('hidden');
+        document.getElementById('confirm-delete-button-' + jadwalId).classList.add('hidden'); // Ensure "Yes, I'm sure" is hidden initially
+        document.getElementById('show-delete-confirmation-button-' + jadwalId).classList.remove('hidden'); // Ensure "Delete" button is visible initially
+    }
 
-function hideModal(jadwalId) {
-    document.getElementById('popup-modal-' + jadwalId).classList.add('hidden');
-}
+    function hideModal(jadwalId) {
+        document.getElementById('popup-modal-' + jadwalId).classList.add('hidden');
+    }
 
-function showDeleteConfirmation(jadwalId) {
-    document.getElementById('confirm-delete-button-' + jadwalId).classList.remove('hidden');
-    document.getElementById('show-delete-confirmation-button-' + jadwalId).classList.add('hidden');
-}
+    function showDeleteConfirmation(jadwalId) {
+        document.getElementById('confirm-delete-button-' + jadwalId).classList.remove('hidden');
+        document.getElementById('show-delete-confirmation-button-' + jadwalId).classList.add('hidden');
+    }
 
-function confirmDelete(jadwalId) {
-    document.getElementById('delete-form-' + jadwalId).submit();
-}
-
+    function confirmDelete(jadwalId) {
+        document.getElementById('delete-form-' + jadwalId).submit();
+    }
 </script>
 @endsection

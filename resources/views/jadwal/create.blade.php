@@ -46,13 +46,9 @@
                         <label for="hari" class="block text-sm font-medium text-gray-700 dark:text-white">Hari</label>
                         <select name="hari" id="hari" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                             <option value="" disabled {{ old('hari') == '' ? 'selected' : '' }}>Pilih Hari</option>
-                            <option value="Senin" {{ old('hari', $jadwal->hari ?? '') == 'Senin' ? 'selected' : '' }}>Senin</option>
-                            <option value="Selasa" {{ old('hari', $jadwal->hari ?? '') == 'Selasa' ? 'selected' : '' }}>Selasa</option>
-                            <option value="Rabu" {{ old('hari', $jadwal->hari ?? '') == 'Rabu' ? 'selected' : '' }}>Rabu</option>
-                            <option value="Kamis" {{ old('hari', $jadwal->hari ?? '') == 'Kamis' ? 'selected' : '' }}>Kamis</option>
-                            <option value="Jumat" {{ old('hari', $jadwal->hari ?? '') == 'Jumat' ? 'selected' : '' }}>Jumat</option>
-                            <option value="Sabtu" {{ old('hari', $jadwal->hari ?? '') == 'Sabtu' ? 'selected' : '' }}>Sabtu</option>
-                            <option value="Minggu" {{ old('hari', $jadwal->hari ?? '') == 'Minggu' ? 'selected' : '' }}>Minggu</option>
+                            @foreach (['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'] as $day)
+                                <option value="{{ $day }}" {{ old('hari', $jadwal->hari ?? '') == $day ? 'selected' : '' }}>{{ $day }}</option>
+                            @endforeach
                         </select>
                         @error('hari')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
@@ -74,7 +70,6 @@
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
-                                                        
                 </div>
 
                 <div class="mt-6">

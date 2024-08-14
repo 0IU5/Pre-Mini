@@ -20,6 +20,7 @@
             <div class="mb-4">
                 <label for="id_mapel" class="block text-gray-700 dark:text-gray-200">Mata Pelajaran:</label>
                 <select id="id_mapel" name="id_mapel" class="w-full p-2 rounded border border-gray-300 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-200">
+                    <option value="" disabled {{ old('id_guru') == '' ? 'selected' : '' }}>Pilih Mapel</option>
                     @foreach ($mapel as $m)
                         <option value="{{ $m->id_mapel }}" {{ old('id_mapel') ?? $guru->id_mapel == $m->id_mapel ? 'selected' : '' }}>
                             {{ $m->mapel }}

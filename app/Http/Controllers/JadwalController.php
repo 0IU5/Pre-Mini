@@ -11,10 +11,25 @@ use Illuminate\Http\Request;
 
 class JadwalController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $jadwal = Jadwal::all();
-        return view('jadwal.index', compact('jadwal'));
+        // Ambil query pencarian dari request
+        $search = $request->input('search');
+
+        // Query dasar dengan eager loading
+        $query = Jadwal::with(['guru', 'mapel', 'payment.paket']);
+
+        // Terapkan pencarian jika ada
+        if ($search) {
+            $query->whereHas('payment', function($q) use ($search) {
+                $q->where('nama', 'like', "%{$search}%");
+            });
+        }
+
+        // Ambil data jadwal dengan pagination
+        $jadwal = $query->paginate(10);
+
+        return view('jadwal.index', compact('jadwal', 'search'));
     }
 
     public function create()
@@ -51,18 +66,17 @@ class JadwalController extends Controller
         $guru = Guru::findOrFail($request->id_guru);
         $validatedData['id_mapel'] = $guru->id_mapel;
 
-        // Cek apakah guru sudah mengajar di jadwal yang sama dengan paket yang sama
-        $conflict = Jadwal::where('id_guru', $request->id_guru)
-            ->where('hari', $request->hari)
+        // Cek apakah sudah ada jadwal pada hari dan jam yang sama untuk paket yang sama
+        $conflict = Jadwal::where('hari', $request->hari)
             ->where(function($query) use ($request) {
                 $query->whereBetween('start_time', [$request->start_time, $request->end_time])
-                    ->orWhereBetween('end_time', [$request->start_time, $request->end_time]);
+                      ->orWhereBetween('end_time', [$request->start_time, $request->end_time]);
             })
-            ->where('id_payment', '!=', $request->id_payment)
+            ->where('id_payment', $request->id_payment)
             ->exists();
 
         if ($conflict) {
-            return back()->withErrors(['conflict' => 'Jadwal bentrok! Pilih jam lain atau ganti guru.']);
+            return back()->withErrors(['conflict' => 'Anda sudah memiliki jadwal di jam dan hari tersebut!'])->withInput();
         }
 
         Jadwal::create($validatedData);
@@ -112,19 +126,18 @@ class JadwalController extends Controller
         $guru = Guru::findOrFail($request->id_guru);
         $validatedData['id_mapel'] = $guru->id_mapel;
 
-        // Cek apakah guru sudah mengajar di jadwal yang sama dengan paket yang sama, kecuali jadwal yang sedang diedit
-        $conflict = Jadwal::where('id_guru', $request->id_guru)
-            ->where('hari', $request->hari)
+        // Cek apakah sudah ada jadwal pada hari dan jam yang sama untuk paket yang sama, kecuali jadwal yang sedang diedit
+        $conflict = Jadwal::where('hari', $request->hari)
             ->where('id_jadwal', '!=', $jadwal->id_jadwal)
             ->where(function($query) use ($request) {
                 $query->whereBetween('start_time', [$request->start_time, $request->end_time])
                       ->orWhereBetween('end_time', [$request->start_time, $request->end_time]);
             })
-            ->where('id_payment', '!=', $request->id_payment)
+            ->where('id_payment', $request->id_payment)
             ->exists();
 
         if ($conflict) {
-            return back()->withErrors(['conflict' => 'Guru ini sudah mengajar di jadwal lain pada hari dan jam yang sama dengan paket yang berbeda!'])->withInput();
+            return back()->withErrors(['conflict' => 'Anda sudah memiliki jadwal di jam dan hari yang sama!'])->withInput();
         }
 
         // Memperbarui data jadwal

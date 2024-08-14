@@ -34,7 +34,7 @@
                 @forelse ($paket as $p)
                 <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md overflow-hidden">
                     <div class="p-6">
-                        <h3 class="text-xl text-center font-semibold text-blue-600 dark:text-blue mb-6 -mt-4">{{ $p->paket }}</h3>
+                        <h3 class="text-xl font-semibold text-blue-500 dark:text-blue mb-2 -mt-4">{{ $p->paket }}</h3>
                         <p class="text-gray-600 dark:text-gray-400 mt-2 mb-2 max-h-24 overflow-hidden overflow-ellipsis">
                             <span class="font-bold text-gray-900 dark:text-white">Deskripsi:</span> {{ $p->deskripsi }}
                         </p>                            
