@@ -3,13 +3,11 @@
 @section('content')
 <section class="bg-gray-600 dark:bg-gray-900 min-h-screen">
     <div class="py-8 px-4 mx-auto max-w-7xl lg:py-16">
-        <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Jadwal Siswa</h2>
-
         @if (session('success'))
-            <div id="alert-success" class="bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 py-3 px-5 mb-4 rounded flex justify-between items-center">
-                {{ session('success') }}
-                <button onclick="document.getElementById('alert-success').style.display='none'" class="text-green-700 dark:text-green-300 ml-4">&times;</button>
-            </div>
+        <div id="alert-success" class="bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 py-3 px-5 mb-4 rounded flex justify-between items-center">
+            {{ session('success') }}
+            <button onclick="document.getElementById('alert-success').style.display='none'" class="text-green-700 dark:text-green-300 ml-4">&times;</button>
+        </div>
         @endif
 
         <div class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white dark:bg-gray-900">
@@ -23,7 +21,7 @@
                 <form method="GET" action="{{ route('jadwal.index') }}">
                     <input type="text" name="search" placeholder="Search nama siswa" value="{{ $search ?? '' }}" class="px-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">
                     <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
-                        Cari
+                        Cari Jadwal
                     </button>
                 </form>
             </div>
@@ -52,17 +50,19 @@
                 </div>
                 <div class="p-4 bg-gray-50 dark:bg-gray-700 flex justify-between">
                     <a href="{{ route('jadwal.edit', $data->id_jadwal) }}" class="text-yellow-600 dark:text-yellow-500 hover:underline">Edit</a>
-                    <form action="{{ route('jadwal.destroy', $data->id_jadwal) }}" method="POST">
+                    <!-- Button for Deleting -->
+                    <form id="delete-form-{{ $data->id_jadwal }}" action="{{ route('jadwal.destroy', $data->id_jadwal) }}" method="POST" class="inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="text-red-600 dark:text-red-500 hover:underline">Delete</button>
+                        <button type="submit" class="text-red-600 dark:text-red-500 hover:underline">
+                            Delete
+                        </button>
                     </form>
                 </div>
-               
             </div>
 
             <!-- Modal -->
-            <div id="popup-modal-{{ $data->id_jadwal }}" tabindex="-1" class="hidden fixed inset-0 z-50 items-center justify-center bg-gray-900 bg-opacity-50">
+            <div id="popup-modal-{{ $data->id_jadwal }}" tabindex="-1" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
                 <div class="relative p-4 w-full max-w-md mx-auto bg-white rounded-lg shadow dark:bg-gray-700">
                     <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" onclick="hideModal({{ $data->id_jadwal }})">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -100,7 +100,6 @@
                             End: 
                             <span class="font-normal text-lg">{{ \Carbon\Carbon::parse($data->end_time)->format('h:i A' ) ?? '-' }}</span>
                         </p>
-                    </div>
                     </div>
                 </div>
             </div>
