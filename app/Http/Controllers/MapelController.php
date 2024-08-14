@@ -33,12 +33,13 @@ class MapelController extends Controller
     {
         // Validasi data yang diterima
         $validatedData = $request->validate([
-            'mapel' => 'required|string|max:255',
+            'mapel' => 'required|string|max:255|unique:mapel,mapel',
             'deskripsi' => 'required|string'
         ], [
             'mapel.required' => 'Kolom wajib diisi.',
             'mapel.string' => 'Kolom harus berupa string.',
             'mapel.max' => 'Mapel tidak boleh lebih dari 255 karakter.',
+            'mapel.unique' => 'Mapel sudah ada!',
             'deskripsi.required' => 'Kolom wajib diisi.',
             'deskripsi.string' => 'Deskripsi harus berupa string.',
         ]);
@@ -49,6 +50,7 @@ class MapelController extends Controller
         // Redirect dengan pesan sukses
         return redirect()->route('mapel.index')->with('success', 'Mata pelajaran berhasil ditambahkan.');
     }
+
 
     /**
      * Menampilkan detail mata pelajaran tertentu.
@@ -73,24 +75,25 @@ class MapelController extends Controller
      */
     public function update(Request $request, Mapel $mapel)
     {
-        // Validasi data yang diterima
         $validatedData = $request->validate([
-            'mapel' => 'required|string|max:255',
+            'mapel' => 'required|string|max:255|unique:mapel,mapel,' . $mapel->id_mapel . ',id_mapel', // Ganti `id` dengan primary key yang sesuai
             'deskripsi' => 'required|string'
         ], [
             'mapel.required' => 'Kolom wajib diisi.',
             'mapel.string' => 'Kolom harus berupa string.',
-            'mapel.max' => 'Kolom tidak boleh lebih dari 255 karakter.',
+            'mapel.max' => 'Mapel tidak boleh lebih dari 255 karakter.',
+            'mapel.unique' => 'Mapel sudah ada!',
             'deskripsi.required' => 'Kolom wajib diisi.',
             'deskripsi.string' => 'Deskripsi harus berupa string.',
-        ]);
-
+        ]);        
+    
         // Memperbarui data mata pelajaran
         $mapel->update($validatedData);
-
+    
         // Redirect dengan pesan sukses
         return redirect()->route('mapel.index')->with('success', 'Data mata pelajaran berhasil diperbarui.');
     }
+    
 
     /**
      * Menghapus mata pelajaran dari penyimpanan.
