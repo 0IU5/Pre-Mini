@@ -4,9 +4,9 @@
 <section class="text-gray-600 body-font">
   <div class="container px-5 py-24 mx-auto">
     <div class="flex justify-between items-center mb-12">
-      <h1 class="text-3xl font-medium title-font text-white">Testimonials</h1>
+      <h1 class="text-3xl font-medium title-font text-white">Testimoni</h1>
       <a href="{{ route('feedback.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
-        Add Feedback
+        Tambah Masukkan
       </a>
     </div>
     <div class="flex flex-wrap -m-4 relative z-0">
