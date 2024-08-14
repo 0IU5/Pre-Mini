@@ -93,7 +93,7 @@
 
         <div class="container px-5 py-24 mx-auto flex flex-wrap">
         <div class="flex flex-col text-center w-full mb-20">
-          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Our Services</h1>
+          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Layanan Kami</h1>
           <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Kami menyediakan beberapa pilihan pelayanan untuk murid..</p>
         </div>
           <div class="lg:w-1/2 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
@@ -109,7 +109,7 @@
               <div class="flex-grow">
                 <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Menyediakan Private CLass</h2>
                 <p class="leading-relaxed text-base">Jadi private class dikhusus kan bagi anak murid yang ingin belajar namun hanya sendiri tidak bersama teman.</p>
-                <a href="{{ route('payment.index') }}" class="mt-3 text-blue-500 inline-flex items-center">Learn More
+                <a href="{{ route('payment.index') }}" class="mt-3 text-blue-500 inline-flex items-center">Lebih lanjut
                   <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                     <path d="M5 12h14M12 5l7 7-7 7"></path>
                   </svg>
@@ -127,7 +127,7 @@
               <div class="flex-grow">
                 <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Terhubung dengan RoboGuru</h2>
                 <p class="leading-relaxed text-base">Untuk menunjang dan meningkatkan cara belajar, kami juga terhubung dengan roboGuru</p>
-                <a href="{{ route('payment.index') }}" class="mt-3 text-blue-500 inline-flex items-center">Learn More
+                <a href="{{ route('payment.index') }}" class="mt-3 text-blue-500 inline-flex items-center">Lebih lanjut
                   <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                     <path d="M5 12h14M12 5l7 7-7 7"></path>
                   </svg>
@@ -144,7 +144,7 @@
               <div class="flex-grow">
                 <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Konseling</h2>
                 <p class="leading-relaxed text-base">Jadi kami juga menyediakan bimbingan konseling untuk murid - murid.</p>
-                <a href="{{ route('payment.index') }}" class="mt-3 text-blue-500 inline-flex items-center">Learn More
+                <a href="{{ route('payment.index') }}" class="mt-3 text-blue-500 inline-flex items-center">Lebih lanjut
                   <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                     <path d="M5 12h14M12 5l7 7-7 7"></path>
                   </svg>
