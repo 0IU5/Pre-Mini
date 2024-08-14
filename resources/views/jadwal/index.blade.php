@@ -21,7 +21,7 @@
                 <form method="GET" action="{{ route('jadwal.index') }}">
                     <input type="text" name="search" placeholder="Search nama siswa" value="{{ $search ?? '' }}" class="px-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">
                     <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
-                        Cari
+                        Cari Jadwal
                     </button>
                 </form>
             </div>
