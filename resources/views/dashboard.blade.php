@@ -7,7 +7,7 @@
       <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Selamat Datang {{ auth()->user()->name }}
         <br class="hidden lg:inline-block">di website kami!!
       </h1>
-      <p class="mb-8 leading-relaxed">Di Bimbel, kami percaya bahwa setiap siswa mempunyai potensi untuk berprestasi. Misi kami adalah menyediakan layanan bimbingan belajar yang dipersonalisasi dan efektif yang memenuhi kebutuhan unik setiap pelajar, membantu mereka mencapai tujuan akademik dan seterusnya.</p>
+      <p class="mb-8 leading-relaxed">Di StarClass ⭐, kami percaya bahwa setiap siswa mempunyai potensi untuk berprestasi. Misi kami adalah menyediakan layanan bimbingan belajar yang dipersonalisasi dan efektif yang memenuhi kebutuhan unik setiap pelajar, membantu mereka mencapai tujuan akademik dan seterusnya.</p>
       <div class="flex justify-center">
         <a href="{{ route('payment.index') }}" class="inline-flex text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg ">Mulai!!</a>        
       </div>
