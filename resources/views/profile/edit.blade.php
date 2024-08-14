@@ -27,6 +27,18 @@
                 </div>
 
                 <div class="mb-4">
+                    <label for="jenjang_pendidikan" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Jenjang Pendidikan</label>
+                    <select name="jenjang_pendidikan" id="jenjang_pendidikan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <option value="SD" {{ old('jenjang_pendidikan', $user->jenjang_pendidikan) == 'SD' ? 'selected' : '' }}>SD</option>
+                        <option value="SMP" {{ old('jenjang_pendidikan', $user->jenjang_pendidikan) == 'SMP' ? 'selected' : '' }}>SMP</option>
+                        <option value="SMA" {{ old('jenjang_pendidikan', $user->jenjang_pendidikan) == 'SMA' ? 'selected' : '' }}>SMA</option>
+                    </select>
+                    @error('jenjang_pendidikan')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-4">
                     <label for="kelas" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Kelas</label>
                     <input type="number" name="kelas" id="kelas" value="{{ old('kelas', $user->kelas) }}" min="1" max="13" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                     @error('kelas')
@@ -48,31 +60,6 @@
                     @error('tanggal_lahir')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
-                </div>
-
-                <div class="mb-4">
-                    <label for="jenjang_pendidikan" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Jenjang Pendidikan</label>
-                    <select name="jenjang_pendidikan" id="jenjang_pendidikan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        <option value="SD" {{ old('jenjang_pendidikan', $user->jenjang_pendidikan) == 'SD' ? 'selected' : '' }}>SD</option>
-                        <option value="SMP" {{ old('jenjang_pendidikan', $user->jenjang_pendidikan) == 'SMP' ? 'selected' : '' }}>SMP</option>
-                        <option value="SMA" {{ old('jenjang_pendidikan', $user->jenjang_pendidikan) == 'SMA' ? 'selected' : '' }}>SMA</option>
-                    </select>
-                    @error('jenjang_pendidikan')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <div class="mb-4">
-                    <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password Baru (opsional)</label>
-                    <input type="password" name="password" id="password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                    @error('password')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <div class="mb-6">
-                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Konfirmasi Password Baru</label>
-                    <input type="password" name="password_confirmation" id="password_confirmation" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                 </div>
 
                 <div class="flex items-center justify-end">
