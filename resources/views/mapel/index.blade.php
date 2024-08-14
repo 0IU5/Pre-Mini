@@ -10,16 +10,32 @@
             </div>
 
             @if (session('success'))
-                <div class="mb-4 p-4 text-green-800 bg-green-100 rounded-lg dark:bg-green-900 dark:text-green-300" role="alert">
+                <div id="alert-success" class="bg-green-700 text-white py-2 px-4 mb-4 rounded flex justify-between items-center">
                     {{ session('success') }}
+                    <button onclick="document.getElementById('alert-success').style.display='none'" class="text-white ml-4">&times;</button>
+                </div>
+             @endif
+             
+            @if (session('update'))
+                <div id="alert-update" class="bg-green-700 text-white py-2 px-4 mb-4 rounded flex justify-between items-center">
+                    {{ session('update') }}
+                    <button onclick="document.getElementById('alert-update').style.display='none'" class="text-white ml-4">&times;</button>
+                </div>
+            @endif
+
+            @if (session('delete'))
+                <div id="alert-delete" class="bg-green-700 text-white py-2 px-4 mb-4 rounded flex justify-between items-center">
+                    {{ session('delete') }}
+                    <button onclick="document.getElementById('alert-delete').style.display='none'" class="text-white ml-4">&times;</button>
                 </div>
             @endif
 
             @if (session('error'))
-            <div class="mb-4 p-4 text-red-800 bg-red-100 rounded-lg dark:bg-red-900 dark:text-red-300" role="alert">
-                {{ session('error') }}
-            </div>
-        @endif
+                <div id="alert-error" class="bg-red-700 text-white py-2 px-4 mb-4 rounded flex justify-between items-center">
+                    {{ session('error') }}
+                    <button onclick="document.getElementById('alert-error').style.display='none'" class="text-white ml-4">&times;</button>
+                </div>
+            @endif
 
             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                 <thead class="bg-gray-50 dark:bg-gray-800">

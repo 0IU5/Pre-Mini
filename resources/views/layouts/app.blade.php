@@ -23,7 +23,7 @@
             }
         </style>
     </head>
-    <body class="flex flex-col min-h-screen" x-data="{ open: false }" @click.away="open = false">
+    <body class="flex flex-col min-h-screen bg-gray-600" x-data="{ open: false }" @click.away="open = false">
         <!-- Navbar -->
         <div class="navbar bg-base-100 mx-auto flex items-center px-5 py-8 shadow-lg w-full max-h-10">
         <div x-data="{ open: false }">
@@ -135,7 +135,7 @@
                 <!-- Search -->
                 <div class="form-control relative">
                     <form action="{{ route('search') }}" method="GET">
-                        <input type="text" name="query" placeholder="Search halaman" class="input input-bordered w-64 md:w-80 pl-10 mr-6 bg-dash text-black" />
+                        <input type="text" name="query" placeholder="Search halaman" class="input input-bordered w-64 md:w-80 pl-10 mr-6 bg-white text-black" />
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(1, 0, 0, 1);" class="absolute left-3 top-1/2 transform -translate-y-1/2">
                             <path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path>
                             <path d="M11.412 8.586c.379.38.588.882.588 1.414h2a3.977 3.977 0 0 0-1.174-2.828c-1.514-1.512-4.139-1.512-5.652 0l1.412 1.416c.76-.758 2.07-.756 2.826-.002z"></path>
@@ -148,6 +148,7 @@
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">
                     <img
+                        alt="Tailwind CSS Navbar component"
                         src="/img/vector_profile.jpeg" />
                     </div>
                 </div>

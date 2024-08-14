@@ -5,15 +5,6 @@
     <div class="min-h-screen mx-auto max-w-5xl pt-12">
         <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Daftar Pembayaran</h2>
 
-        <div class="flex justify-end">
-            <form method="GET" action="{{ route('payment.index') }}">
-                <input type="text" name="search" placeholder="Search Nama" value="{{ $search ?? '' }}" class="px-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">
-                <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
-                    Cari
-                </button>
-            </form>
-        </div>      
-
         @if (session('success'))
             <div id="alert-success" class="bg-green-700 text-white py-2 px-4 mb-4 rounded flex justify-between items-center">
                 {{ session('success') }}
@@ -38,6 +29,15 @@
                 <button onclick="document.getElementById('alert-error').style.display='none'" class="text-white ml-4">&times;</button>
             </div>
         @endif
+
+        <div class="flex justify-end">
+            <form method="GET" action="{{ route('payment.index') }}">
+                <input type="text" name="search" placeholder="Search Nama" value="{{ $search ?? '' }}" class="px-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">
+                <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                    Cari
+                </button>
+            </form>
+        </div>      
 
         <div class="mb-4">
             <a href="{{ route('payment.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
