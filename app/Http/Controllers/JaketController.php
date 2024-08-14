@@ -33,11 +33,12 @@ class JaketController extends Controller
     {
         $request->validate([
             'hari' => 'required|string',
-            'id_paket' => 'required|exists:paket,id_paket',
+            'id_paket' => 'required|unique:jaket,id_paket|exists:paket,id_paket',
         ],[
             'hari.required' => 'Kolom wajib diisi!',
             'id_paket.required' => 'Kolom wajib diisi!',
-            'id_paket.exists' => 'Paket tidak ditemukan!'
+            'id_paket.exists' => 'Paket tidak ditemukan!',
+            'id_paket.unique' => 'Paket sudah ada!'
         ]);
 
         $jaket = Jaket::create($request->all());
@@ -65,19 +66,23 @@ class JaketController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Jaket $jaket)
-    {
-        $request->validate([
-            'hari' => 'required|string',
-            'id_paket' => 'required|exists:paket,id_paket',
-        ],[
-            'hari.required' => 'Kolom wajib diisi!',
-            'id_paket.required' => 'Kolom wajib diisi!',
-            'id_paket.exists' => 'Paket tidak ditemukan!'
-        ]);
+{
+    $request->validate([
+        'hari' => 'required|string',
+        'id_paket' => 'required|exists:paket,id_paket|unique:jaket,id_paket,' . $jaket->id_jaket . ',id_jaket',
+    ],[
+        'hari.required' => 'Kolom wajib diisi!',
+        'id_paket.required' => 'Kolom wajib diisi!',
+        'id_paket.exists' => 'Paket tidak ditemukan!',
+        'id_paket.unique' => 'Paket sudah ada!'
+    ]);
 
-        $jaket->update($request->all());
-        return redirect()->route('jaket.index')->with('success', 'Data berhasil diupdate.');
-    }
+    $jaket->update($request->all());
+    return redirect()->route('jaket.index')->with('success', 'Data berhasil diupdate.');
+}
+
+
+    
 
     /**
      * Remove the specified resource from storage.

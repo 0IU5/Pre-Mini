@@ -10,11 +10,9 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\FeedbackController;
-use App\Http\Controllers\JadwalPaketController;
 use App\Http\Controllers\JaketController;
 use App\Http\Controllers\SearchController;
-use App\Models\Jaket;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;   
 
 Route::get('/', function () {
     return view('landing-page');
