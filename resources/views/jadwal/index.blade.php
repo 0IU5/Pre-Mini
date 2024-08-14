@@ -3,11 +3,13 @@
 @section('content')
 <section class="bg-gray-600 dark:bg-gray-900 min-h-screen">
     <div class="py-8 px-4 mx-auto max-w-7xl lg:py-16">
+        <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Jadwal Siswa</h2>
+
         @if (session('success'))
-        <div id="alert-success" class="bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 py-3 px-5 mb-4 rounded flex justify-between items-center">
-            {{ session('success') }}
-            <button onclick="document.getElementById('alert-success').style.display='none'" class="text-green-700 dark:text-green-300 ml-4">&times;</button>
-        </div>
+            <div id="alert-success" class="bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 py-3 px-5 mb-4 rounded flex justify-between items-center">
+                {{ session('success') }}
+                <button onclick="document.getElementById('alert-success').style.display='none'" class="text-green-700 dark:text-green-300 ml-4">&times;</button>
+            </div>
         @endif
 
         <div class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white dark:bg-gray-900">

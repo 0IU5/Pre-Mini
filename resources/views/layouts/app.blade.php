@@ -149,7 +149,7 @@
                     <div class="w-10 rounded-full">
                     <img
                         alt="Tailwind CSS Navbar component"
-                        src="./img/vector_profile.jpeg" />
+                        src="/img/vector_profile.jpeg" />
                     </div>
                 </div>
                 <ul     
