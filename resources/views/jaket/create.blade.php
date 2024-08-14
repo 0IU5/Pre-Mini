@@ -7,14 +7,6 @@
             <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6 text-center">Tambah Jadwal Paket</h2>
             
             <form action="{{ route('jaket.store') }}" method="POST">
-                @csrf
-                <div class="mb-4">
-                    <label for="hari" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Hari</label>
-                    <input type="text" name="hari" id="hari" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm dark:bg-gray-700 dark:border-gray-600">
-                    @error('hari')
-                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
-                @enderror
-                </div>
                 <div class="mb-4">
                     <label for="id_paket" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Paket</label>
                     <select name="id_paket" id="id_paket" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm dark:bg-gray-700 dark:border-gray-600">
@@ -24,6 +16,15 @@
                         @endforeach
                     </select>
                     @error('id_paket')
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
+                @enderror
+                </div>
+                
+                @csrf
+                <div class="mb-4">
+                    <label for="hari" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Hari</label>
+                    <input type="text" name="hari" id="hari" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm dark:bg-gray-700 dark:border-gray-600">
+                    @error('hari')
                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                 @enderror
                 </div>

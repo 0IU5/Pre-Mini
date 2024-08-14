@@ -3,11 +3,13 @@
 @section('content')
 <section class="bg-gray-600 dark:bg-gray-900 min-h-screen">
     <div class="py-8 px-4 mx-auto max-w-7xl lg:py-16">
+        <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Jadwal Siswa</h2>
+
         @if (session('success'))
-        <div id="alert-success" class="bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 py-3 px-5 mb-4 rounded flex justify-between items-center">
-            {{ session('success') }}
-            <button onclick="document.getElementById('alert-success').style.display='none'" class="text-green-700 dark:text-green-300 ml-4">&times;</button>
-        </div>
+            <div id="alert-success" class="bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 py-3 px-5 mb-4 rounded flex justify-between items-center">
+                {{ session('success') }}
+                <button onclick="document.getElementById('alert-success').style.display='none'" class="text-green-700 dark:text-green-300 ml-4">&times;</button>
+            </div>
         @endif
 
         <div class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white dark:bg-gray-900">
@@ -54,7 +56,7 @@
             </div>
 
             <!-- Modal -->
-            <div id="popup-modal-{{ $data->id_jadwal }}" tabindex="-1" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+            <div id="popup-modal-{{ $data->id_jadwal }}" tabindex="-1" class="hidden fixed inset-0 z-50 items-center justify-center bg-gray-900 bg-opacity-50">
                 <div class="relative p-4 w-full max-w-md mx-auto bg-white rounded-lg shadow dark:bg-gray-700">
                     <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" onclick="hideModal({{ $data->id_jadwal }})">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -95,7 +97,7 @@
 
                         <!-- Button Delete Confirmation -->
                         <button id="confirm-delete-button-{{ $data->id_jadwal }}" class="hidden text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center" onclick="confirmDelete({{ $data->id_jadwal }})">
-                            Yes, I'm sure
+                            Delete
                         </button>
 
                         <!-- Form for Deleting -->
