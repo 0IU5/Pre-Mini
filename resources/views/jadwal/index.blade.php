@@ -52,7 +52,13 @@
                 </div>
                 <div class="p-4 bg-gray-50 dark:bg-gray-700 flex justify-between">
                     <a href="{{ route('jadwal.edit', $data->id_jadwal) }}" class="text-yellow-600 dark:text-yellow-500 hover:underline">Edit</a>
+                    <form action="{{ route('jadwal.destroy', $data->id_jadwal) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-600 dark:text-red-500 hover:underline">Delete</button>
+                    </form>
                 </div>
+               
             </div>
 
             <!-- Modal -->
@@ -94,22 +100,7 @@
                             End: 
                             <span class="font-normal text-lg">{{ \Carbon\Carbon::parse($data->end_time)->format('h:i A' ) ?? '-' }}</span>
                         </p>
-
-                        <!-- Button Delete Confirmation -->
-                        <button id="confirm-delete-button-{{ $data->id_jadwal }}" class="hidden text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center" onclick="confirmDelete({{ $data->id_jadwal }})">
-                            Delete
-                        </button>
-
-                        <!-- Form for Deleting -->
-                        <form id="delete-form-{{ $data->id_jadwal }}" action="{{ route('jadwal.destroy', $data->id_jadwal) }}" method="POST" class="hidden">
-                            @csrf
-                            @method('DELETE')
-                        </form>
-
-                        <!-- Button to show the delete confirmation -->
-                        <button id="show-delete-confirmation-button-{{ $data->id_jadwal }}" class="text-red-600 dark:text-red-500 hover:underline" onclick="showDeleteConfirmation({{ $data->id_jadwal }})">
-                            Delete
-                        </button>
+                    </div>
                     </div>
                 </div>
             </div>
